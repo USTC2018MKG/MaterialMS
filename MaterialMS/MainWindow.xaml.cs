@@ -20,30 +20,39 @@ namespace MaterialMS
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserManagePage userManagePage;
+        UserManagePage userManagePage =new UserManagePage();
         MaterialManagePage materialManagePage = new MaterialManagePage();
         OrderDetailPage orderDetailPage;
         OrderFormPage orderFormPage;
         public MainWindow()
         {
             InitializeComponent();
-            UserManagePage userManagePage = new UserManagePage();
-            gridPage.Navigate(userManagePage);
+            //UserManagePage userManagePage = new UserManagePage();
+            //gridPage.Navigate(userManagePage);
         }
 
         private void userPageClick(object sender, RoutedEventArgs e)
         {
-            gridPage.Navigate(userManagePage);
-         
+
+            ContentControl.Content = new Frame()
+            {
+                Content = userManagePage
+                //gridPage.Navigate(userManagePage);
+
+            };
         }
 
         private void materialClick(object sender, RoutedEventArgs e)
         {
-            gridPage.Navigate(materialManagePage);
-            //gridPage.Children.Add(new MaterialManagePage());
-        }
+     
+            ContentControl.Content = new Frame()
+            {
+                Content = materialManagePage
+                //gridPage.Navigate(userManagePage);
 
-        private void orderPageClick(object sender, RoutedEventArgs e)
+            };
+        }
+            private void orderPageClick(object sender, RoutedEventArgs e)
         {
             //gridPage.Children.Add(new OrderFormPage());
         }

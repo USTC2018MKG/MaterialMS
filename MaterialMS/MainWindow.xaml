@@ -38,10 +38,10 @@
             <Button Grid.Row="3" Grid.Column="0" Background="#FF0E0D0D" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="20" Click="orderDetPageClick">订单详情
             </Button>
         </Grid>
-        <Frame Grid.Row="1" Grid.Column="1" Margin="10" Background="AliceBlue" Name="gridPage">
+        <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Background="AliceBlue" Name="ContentControl">
          
               
           
-        </Frame>
+        </ContentControl>
     </Grid>
 </Window>
