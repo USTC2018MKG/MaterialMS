@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="600" Width="1000">
+    <Grid Background="#FFFFFF" ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Background="#FF19AA8D" Foreground="#FFFAFDFC" FontSize="36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">物料管理</Label>
+        <Grid Grid.Row="0" Grid.Column="1" Background="#FF19AA8D">
+            <Button Background="#FF19AA8D" BorderBrush="{x:Null}" FontSize="14" Foreground="White" Width="70" HorizontalAlignment="Right" Margin="0,0,20,0" Height="32" VerticalAlignment="Center">
+                退出登录
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Margin="10,10,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Foreground="White" Background="Black" BorderBrush="White" FontSize="20" Click="userPageClick">用户管理
+            </Button>
+            <Button Grid.Row="1" Grid.Column="0" Background="Black" BorderBrush="White" Foreground="White" FontSize="20" Click="materialClick">物料管理
+            </Button>
+            <Button Grid.Row="2" Grid.Column="0" BorderBrush="#FFFBF9F9" Foreground="White" Background="#FF020202" FontSize="20" Click="orderPageClick">订单管理
+            </Button>
+            <Button Grid.Row="3" Grid.Column="0" Background="#FF0E0D0D" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="20" Click="orderDetPageClick">订单详情
+            </Button>
+        </Grid>
+        <Frame Grid.Row="1" Grid.Column="1" Margin="10" Background="AliceBlue" Name="gridPage">
+         
+              
+          
+        </Frame>
     </Grid>
 </Window>

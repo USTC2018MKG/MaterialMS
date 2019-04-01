@@ -14,5 +14,9 @@
         <Button Content="登录" HorizontalAlignment="Left" Margin="360,244,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
         <Label Name="labNameMsg" HorizontalAlignment="Left" Margin="495,142,0,0" VerticalAlignment="Top"/>
         <Label Name="labPwdMsg" HorizontalAlignment="Left" Margin="495,182,0,0" VerticalAlignment="Top"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/login_bg.png" Stretch="Fill"/>
+        </Grid.Background>
     </Grid>
+     
 </Window>

@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:MaterialMS"
              StartupUri="Login.xaml">
     <Application.Resources>
-         
+        <Style x:Key="commenLable">
+            <Setter Property="Label.HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Label.VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Label.FontFamily" Value="Microsoft YaHei Light"/>
+            <Setter Property="Label.FontSize" Value="20"/>
+            <Setter Property="Label.Foreground" Value="White"/>
+        </Style>
     </Application.Resources>
 </Application>
