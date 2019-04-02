@@ -20,46 +20,52 @@ namespace MaterialMS
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserManagePage userManagePage =new UserManagePage();
-        MaterialManagePage materialManagePage = new MaterialManagePage();
+        UserManagePage userManagePage;
+        MaterialManagePage materialManagePage;
         OrderDetailPage orderDetailPage;
         OrderFormPage orderFormPage;
         public MainWindow()
         {
             InitializeComponent();
-            //UserManagePage userManagePage = new UserManagePage();
-            //gridPage.Navigate(userManagePage);
         }
 
         private void userPageClick(object sender, RoutedEventArgs e)
         {
-
+            if (userManagePage == null)
+                userManagePage = new UserManagePage();
             ContentControl.Content = new Frame()
             {
                 Content = userManagePage
-                //gridPage.Navigate(userManagePage);
-
             };
         }
 
         private void materialClick(object sender, RoutedEventArgs e)
         {
-     
+            if (materialManagePage == null)
+                materialManagePage = new MaterialManagePage();
             ContentControl.Content = new Frame()
             {
                 Content = materialManagePage
-                //gridPage.Navigate(userManagePage);
-
             };
         }
-            private void orderPageClick(object sender, RoutedEventArgs e)
+        private void orderPageClick(object sender, RoutedEventArgs e)
         {
-            //gridPage.Children.Add(new OrderFormPage());
+            if (orderFormPage == null)
+                orderFormPage = new OrderFormPage();
+            ContentControl.Content = new Frame()
+            {
+                Content = orderFormPage
+            };
         }
 
         private void orderDetPageClick(object sender, RoutedEventArgs e)
         {
-           // gridPage.Children.Add(new OrderDetailPage());
+            if (orderDetailPage == null)
+                orderDetailPage = new OrderDetailPage();
+            ContentControl.Content = new Frame()
+            {
+                Content = orderDetailPage
+            };
         }
     }
 }
