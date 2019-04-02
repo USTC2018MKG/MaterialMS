@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,84 @@ namespace MaterialMS
     /// </summary>
     public partial class UserRegistWindow : Window
     {
+        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
+
         public UserRegistWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Regist(object sender, RoutedEventArgs e)
+        {
+            if (txtId.Text.Trim() == "")
+            {
+                labIdMsg.Content = "请输入员工编号!";
+                txtId.Focus();
+                return;
+            }else if (txtName.Text.Trim() == "")
+            {
+                labNameMsg.Content = "请输入员工姓名!";
+                txtName.Focus();
+                return;
+            }
+            else if (txtAge.Text.Trim() == "")
+            {
+                labAgeMsg.Content = "请输入员工年龄!";
+                txtAge.Focus();
+                return;
+            }
+            else if (txtPhone.Text.Trim() == "")
+            {
+                labPhoneMsg.Content = "请输入电话号码!";
+                txtPhone.Focus();
+                return;
+            }
+            else
+            {
+                //连接数据库对象
+                MySqlConnection conn = new MySqlConnection(myConnectionString);
+                string uuid = System.Guid.NewGuid().ToString("N");
+                int sex;
+                if (txtSex.IsChecked == true)
+                {
+                    sex = 1;
+                }else {
+                    sex = 0;
+                }
+                string sql = string.Format("insert into user (user_id,emplyee_id,user_name,user_pwd,sex,phone,state,age,type) values('{0}','{1}','{2}',123,'{3}','{4}',0,'{5}',2)", uuid,txtId.Text.Trim(),txtName.Text.Trim(),sex,txtPhone.Text.Trim(),txtAge.Text.Trim());
+                try
+                {
+                    conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                    //对数据库进行插入
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    int result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                    {
+                        MessageBox.Show("插入成功!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("插入失败!");
+                        txtId.Text = "";
+                        txtName.Text = "";
+                        txtAge.Text = "";
+                        txtPhone.Text = "";
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("插入失败!");
+                    txtId.Text = "";
+                    txtName.Text = "";
+                    txtAge.Text = "";
+                    txtPhone.Text = "";
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

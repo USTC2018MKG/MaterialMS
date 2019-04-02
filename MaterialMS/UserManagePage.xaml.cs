@@ -49,7 +49,7 @@ namespace MaterialMS
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                     Console.WriteLine("已经建立连接");
-                    //对数据库进行插入
+                    //对数据库进行查询
                     MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                     DataSet ds = new DataSet();
                     md.Fill(ds);
@@ -91,7 +91,8 @@ namespace MaterialMS
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-          
+            UserRegistWindow urw = new UserRegistWindow();
+            urw.Show();
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)

@@ -39,7 +39,6 @@
                 <DataGridTextColumn Header="员工类型" Binding="{Binding Path=type}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <GridSplitter Height="5" VerticalAlignment="Top" Width="789"/>
     </DockPanel>
 
 
