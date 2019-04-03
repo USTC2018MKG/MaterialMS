@@ -84,6 +84,9 @@
     <Compile Include="UserManagePage.xaml.cs">
       <DependentUpon>UserManagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserRegistWindow.xaml.cs">
+      <DependentUpon>UserRegistWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,6 +118,10 @@
     <Page Include="UserManagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserRegistWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

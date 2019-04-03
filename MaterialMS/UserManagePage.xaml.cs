@@ -23,7 +23,7 @@ namespace MaterialMS
     /// </summary>
     public partial class UserManagePage : Page
     {
-        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=GR3210123;";
+        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
 
         public UserManagePage()
         {
