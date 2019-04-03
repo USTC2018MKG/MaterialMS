@@ -37,7 +37,7 @@ namespace MaterialMS
                 txtUserName.Focus();
                 return;
             }
-            else if (txtPwd.Text.Trim() == "")
+            else if (txtPwd.Password.Trim() == "")
             {
                 labPwdMsg.Content = "密码不能为空!";
                 txtPwd.Focus();
@@ -47,7 +47,7 @@ namespace MaterialMS
             ConnectionDB();
         }
 
-        private String myConnectionString = "Server=172.16.73.137;Database=mms;Uid=root;Pwd=123456;";
+        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
         public void ConnectionDB()
         {
 
@@ -65,10 +65,10 @@ namespace MaterialMS
                 {
                     labNameMsg.Content = "用户名不存在！请重新输入";
                     txtUserName.Text = "";
-                    txtPwd.Text = "";
+                    txtPwd.Password = "";
                     txtUserName.Focus();
                 }
-                else if (sdr["user_pwd"].ToString().Trim() == txtPwd.Text.Trim())
+                else if (sdr["user_pwd"].ToString().Trim() == txtPwd.Password.Trim())
                 {
                     MainWindow Mn = new MainWindow();
                     Mn.Show();
@@ -77,7 +77,7 @@ namespace MaterialMS
                 {
                     labPwdMsg.Content = "密码错误!请重新输入！";
                     txtUserName.Text = "";
-                    txtPwd.Text = "";
+                    txtPwd.Password = "";
                 }
             }
             catch (Exception)

@@ -9,14 +9,14 @@
     <Grid>
         <Label Content="用户名" HorizontalAlignment="Left" Margin="291,142,0,0" VerticalAlignment="Top" />
         <Label Content="密码" HorizontalAlignment="Left" Margin="295,182,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="344,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtUserName"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="344,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPwd"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="344,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtUserName"/>
         <Button Content="登录" HorizontalAlignment="Left" Margin="360,244,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
         <Label Name="labNameMsg" HorizontalAlignment="Left" Margin="495,142,0,0" VerticalAlignment="Top"/>
         <Label Name="labPwdMsg" HorizontalAlignment="Left" Margin="495,182,0,0" VerticalAlignment="Top"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="344,182,0,0" VerticalAlignment="Top" Width="120" Height="25" Name="txtPwd"/>
         <Grid.Background>
             <ImageBrush ImageSource="Resources/login_bg.png" Stretch="Fill"/>
         </Grid.Background>
     </Grid>
-     
+
 </Window>
