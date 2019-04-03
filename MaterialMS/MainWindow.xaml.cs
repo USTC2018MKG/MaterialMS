@@ -30,9 +30,8 @@ namespace MaterialMS
         }
 
         private void userPageClick(object sender, RoutedEventArgs e)
-        {
-            if (userManagePage == null)
-                userManagePage = new UserManagePage();
+        {           
+            userManagePage = new UserManagePage();
             ContentControl.Content = new Frame()
             {
                 Content = userManagePage
@@ -40,18 +39,16 @@ namespace MaterialMS
         }
 
         private void materialClick(object sender, RoutedEventArgs e)
-        {
-            if (materialManagePage == null)
-                materialManagePage = new MaterialManagePage();
+        {       
+            materialManagePage = new MaterialManagePage();
             ContentControl.Content = new Frame()
             {
                 Content = materialManagePage
             };
         }
         private void orderPageClick(object sender, RoutedEventArgs e)
-        {
-            if (orderFormPage == null)
-                orderFormPage = new OrderFormPage();
+        {           
+            orderFormPage = new OrderFormPage();
             ContentControl.Content = new Frame()
             {
                 Content = orderFormPage
@@ -59,9 +56,8 @@ namespace MaterialMS
         }
 
         private void orderDetPageClick(object sender, RoutedEventArgs e)
-        {
-            if (orderDetailPage == null)
-                orderDetailPage = new OrderDetailPage();
+        {     
+            orderDetailPage = new OrderDetailPage();
             ContentControl.Content = new Frame()
             {
                 Content = orderDetailPage

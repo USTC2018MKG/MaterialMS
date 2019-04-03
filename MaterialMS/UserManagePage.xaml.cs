@@ -22,9 +22,8 @@ namespace MaterialMS
     /// UserManagePage.xaml 的交互逻辑
     /// </summary>
     public partial class UserManagePage : Page
-    {
-        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
-
+    {        
+        private User user;
         public UserManagePage()
         {
             InitializeComponent();
@@ -44,7 +43,7 @@ namespace MaterialMS
             {
                 labSearchMsg.Content = "";
                 //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(myConnectionString);
+                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("select * from user where user_name = '{0}'", txtName.Text.Trim());
                 try
                 {
@@ -69,7 +68,7 @@ namespace MaterialMS
             else
             {
                 //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(myConnectionString);
+                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("select * from user where emplyee_id = '{0}'", txtId.Text.Trim());
                 try
                 {
@@ -98,7 +97,8 @@ namespace MaterialMS
 
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
-
+            UserModifyWindow umw = new UserModifyWindow(user);
+            umw.Show();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -107,7 +107,7 @@ namespace MaterialMS
         }
 
         private void getUserTable() {
-            MySqlConnection conn = new MySqlConnection(myConnectionString);
+            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             string sql = string.Format("select * from user");
             try
             {
@@ -125,6 +125,25 @@ namespace MaterialMS
             {
                 conn.Close();
             }
+        }
+
+        private void Dg1_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+            DataRowView rowSelected = dg1.SelectedItem as DataRowView;
+            if (rowSelected != null) {
+                user = new User();                
+                user.emplyee_id = rowSelected["emplyee_id"].ToString(); ;
+                user.name = rowSelected["user_name"].ToString();
+                user.phone = rowSelected["phone"].ToString();
+                user.sex = rowSelected["sex"].ToString();
+                user.age = rowSelected["age"].ToString();
+
+            }
+            
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

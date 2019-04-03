@@ -46,13 +46,12 @@ namespace MaterialMS
 
             ConnectionDB();
         }
-
-        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
+    
         public void ConnectionDB()
         {
 
             string name = txtUserName.Text;
-            MySqlConnection connection = new MySqlConnection(myConnectionString);
+            MySqlConnection connection = new MySqlConnection(Constant.myConnectionString);
             connection.Open();
             try
             {

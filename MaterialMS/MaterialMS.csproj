@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
@@ -69,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constant.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -81,8 +85,12 @@
     <Compile Include="OrderFormPage.xaml.cs">
       <DependentUpon>OrderFormPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="UserManagePage.xaml.cs">
       <DependentUpon>UserManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserModifyWindow.xaml.cs">
+      <DependentUpon>UserModifyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserRegistWindow.xaml.cs">
       <DependentUpon>UserRegistWindow.xaml</DependentUpon>
@@ -116,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserModifyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +168,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="app.ico" />
     <Content Include="Resources\login_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -16,29 +16,22 @@ using System.Windows.Shapes;
 namespace MaterialMS
 {
     /// <summary>
-    /// UserRegistWindow.xaml 的交互逻辑
+    /// UserModifyWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class UserRegistWindow : Window
+    public partial class UserModifyWindow : Window
     {
-        public UserRegistWindow()
+        private User user;
+        public UserModifyWindow(User user)
         {
             InitializeComponent();
+            this.user = user;
+            InitWindow();
         }
 
-        private void Button_Regist(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (txtId.Text.Trim() == "")
-            {
-                labIdMsg.Content = "请输入员工编号!";
-                txtId.Focus();
-                return;
-            }else if (txtName.Text.Trim() == "")
-            {
-                labNameMsg.Content = "请输入员工姓名!";
-                txtName.Focus();
-                return;
-            }
-            else if (txtAge.Text.Trim() == "")
+
+            if (txtAge.Text.Trim() == "")
             {
                 labAgeMsg.Content = "请输入员工年龄!";
                 txtAge.Focus();
@@ -54,15 +47,16 @@ namespace MaterialMS
             {
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string uuid = System.Guid.NewGuid().ToString("N");
                 int sex;
-                if (txtSex.IsChecked == true)
+                if (rdbMan.IsChecked == true)
                 {
                     sex = 1;
-                }else {
+                }
+                else
+                {
                     sex = 0;
                 }
-                string sql = string.Format("insert into user (user_id,emplyee_id,user_name,user_pwd,sex,phone,state,age,type) values('{0}','{1}','{2}',123,'{3}','{4}',0,'{5}',2)", uuid,txtId.Text.Trim(),txtName.Text.Trim(),sex,txtPhone.Text.Trim(),txtAge.Text.Trim());
+                string sql = string.Format("update user set user_name='{0}',sex='{1}',phone='{2}',age='{3}' where emplyee_id='{4}'", txtName.Text.Trim(), sex, txtPhone.Text.Trim(), txtAge.Text.Trim(), user.emplyee_id);
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -76,7 +70,7 @@ namespace MaterialMS
                     else
                     {
                         MessageBox.Show("插入失败!");
-                        txtId.Text = "";
+
                         txtName.Text = "";
                         txtAge.Text = "";
                         txtPhone.Text = "";
@@ -86,7 +80,7 @@ namespace MaterialMS
                 {
                     Console.WriteLine(ex.Message);
                     MessageBox.Show("插入失败!");
-                    txtId.Text = "";
+
                     txtName.Text = "";
                     txtAge.Text = "";
                     txtPhone.Text = "";
@@ -95,6 +89,22 @@ namespace MaterialMS
                 {
                     conn.Close();
                 }
+            }
+        }
+
+        private void InitWindow()
+        {
+
+            txtName.Text = user.name;
+            txtAge.Text = user.age;
+            txtPhone.Text = user.phone;
+            if (user.sex.Equals("1"))
+            {
+                rdbMan.IsChecked = true;
+            }
+            else
+            {
+                rdbWoman.IsChecked = true;
             }
         }
     }
