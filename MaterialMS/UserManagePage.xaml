@@ -28,7 +28,7 @@
             <Button Content="删  除"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
         </StackPanel>
 
-        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Center"   VerticalAlignment="Top"  Name="dg1"  >
+        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Center"   VerticalAlignment="Top"  Name="dg1" SelectedCellsChanged="Dg1_SelectedCellsChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="姓名" Binding="{Binding Path=user_name}" />
                 <DataGridTextColumn Header="编号" Binding="{Binding Path=emplyee_id}"/>
