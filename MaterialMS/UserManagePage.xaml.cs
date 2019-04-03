@@ -29,7 +29,6 @@ namespace MaterialMS
         {
             InitializeComponent();
 
-
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -104,16 +103,6 @@ namespace MaterialMS
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void Dg1_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-            DataRowView rowSelected = dg1.SelectedItem as DataRowView;
-            if (rowSelected != null)
-            {
-                string strID = rowSelected["emplyee_id"].ToString();
-                Console.WriteLine(strID);
-            }
         }
     }
 }
