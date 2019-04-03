@@ -23,12 +23,12 @@ namespace MaterialMS
     /// </summary>
     public partial class UserManagePage : Page
     {
-        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;";
+        private String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=GR3210123;";
 
         public UserManagePage()
         {
             InitializeComponent();
-
+            getUserTable();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -42,6 +42,7 @@ namespace MaterialMS
             //按照姓名查询
             else if (txtId.Text.Trim() == "")
             {
+                labSearchMsg.Content = "";
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(myConnectionString);
                 string sql = string.Format("select * from user where user_name = '{0}'", txtName.Text.Trim());
@@ -102,6 +103,27 @@ namespace MaterialMS
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void getUserTable() {
+            MySqlConnection conn = new MySqlConnection(myConnectionString);
+            string sql = string.Format("select * from user");
+            try
+            {
+                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                md.Fill(ds);
+                dg1.ItemsSource = ds.Tables[0].AsDataView();
+            }
+            catch (MySqlException ex)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

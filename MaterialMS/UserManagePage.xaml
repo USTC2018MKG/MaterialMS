@@ -27,8 +27,33 @@
             <Button Content="修  改"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Modify_Click"/>
             <Button Content="删  除"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
         </StackPanel>
-
-        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Center"   VerticalAlignment="Top"  Name="dg1"  >
+         
+        <DataGrid AutoGenerateColumns="False" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Top"  Name="dg1" Background="#FF19AA8D" BorderBrush="White"  >
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#FF19AA8D" Offset="1"/>
+                              
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontSize" Value="13" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="姓名" Binding="{Binding Path=user_name}" />
                 <DataGridTextColumn Header="编号" Binding="{Binding Path=emplyee_id}"/>
@@ -39,7 +64,7 @@
                 <DataGridTextColumn Header="员工类型" Binding="{Binding Path=type}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <GridSplitter Height="5" VerticalAlignment="Top" Width="789"/>
+        
     </DockPanel>
 
 
