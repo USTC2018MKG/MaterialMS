@@ -79,8 +79,12 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Material.cs" />
     <Compile Include="MaterialManagePage.xaml.cs">
       <DependentUpon>MaterialManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialRegistWindow.xaml.cs">
+      <DependentUpon>MaterialRegistWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderFormPage.xaml.cs">
       <DependentUpon>OrderFormPage.xaml</DependentUpon>
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MaterialManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaterialRegistWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
