@@ -70,6 +70,7 @@ namespace MaterialMS
                 else if (sdr["user_pwd"].ToString().Trim() == txtPwd.Password.Trim())
                 {
                     MainWindow Mn = new MainWindow();
+                    this.Close();
                     Mn.Show();
                 }
                 else

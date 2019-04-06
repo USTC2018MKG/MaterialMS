@@ -91,14 +91,16 @@ namespace MaterialMS
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            UserRegistWindow urw = new UserRegistWindow();
+            UserRegistWindow urw = new UserRegistWindow(this);
             urw.Show();
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
-            UserModifyWindow umw = new UserModifyWindow(user);
+            
+            UserModifyWindow umw = new UserModifyWindow(user,this);
             umw.Show();
+            getUserTable();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -109,7 +111,7 @@ namespace MaterialMS
                 string msg = "确定要删除用户" + name + "吗？";
 
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("delete from user where emplyee_id='{0}'",user.emplyee_id);
+                string sql = string.Format("update user set state=1 where emplyee_id='{0}'", user.emplyee_id);
                 
                 //MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 MessageBoxResult dr = MessageBox.Show(msg, "删除用户", MessageBoxButton.OKCancel, MessageBoxImage.Question);
@@ -147,7 +149,7 @@ namespace MaterialMS
             }
         }
 
-        private void getUserTable() {
+        public void getUserTable() {
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             string sql = string.Format("select * from user");
             try
@@ -182,10 +184,7 @@ namespace MaterialMS
             
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
     }
 }
 

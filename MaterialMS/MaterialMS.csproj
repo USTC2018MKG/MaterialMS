@@ -73,14 +73,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constant.cs" />
+    <Compile Include="DataAnalysisPage.xaml.cs">
+      <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaterialManagePage.xaml.cs">
       <DependentUpon>MaterialManagePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrderDetailPage.xaml.cs">
-      <DependentUpon>OrderDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderFormPage.xaml.cs">
       <DependentUpon>OrderFormPage.xaml</DependentUpon>
@@ -95,6 +95,10 @@
     <Compile Include="UserRegistWindow.xaml.cs">
       <DependentUpon>UserRegistWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="DataAnalysisPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,10 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MaterialManagePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="OrderDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

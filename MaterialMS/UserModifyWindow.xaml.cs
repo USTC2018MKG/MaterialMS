@@ -21,10 +21,13 @@ namespace MaterialMS
     public partial class UserModifyWindow : Window
     {
         private User user;
-        public UserModifyWindow(User user)
+        private UserManagePage up;
+
+        public UserModifyWindow(User user,UserManagePage up)
         {
             InitializeComponent();
             this.user = user;
+            this.up = up;
             InitWindow();
         }
 
@@ -66,6 +69,7 @@ namespace MaterialMS
                     if (result != 0)
                     {
                         MessageBox.Show("插入成功!");
+                        up.getUserTable();
                     }
                     else
                     {

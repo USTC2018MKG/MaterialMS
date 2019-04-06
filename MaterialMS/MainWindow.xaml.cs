@@ -22,7 +22,7 @@ namespace MaterialMS
     {
         UserManagePage userManagePage;
         MaterialManagePage materialManagePage;
-        OrderDetailPage orderDetailPage;
+        DataAnalysisPage dataAnalysisPage;
         OrderFormPage orderFormPage;
         public MainWindow()
         {
@@ -55,13 +55,20 @@ namespace MaterialMS
             };
         }
 
-        private void orderDetPageClick(object sender, RoutedEventArgs e)
-        {     
-            orderDetailPage = new OrderDetailPage();
+        private void dataAnalysisClick(object sender, RoutedEventArgs e)
+        {
+            dataAnalysisPage = new DataAnalysisPage();
             ContentControl.Content = new Frame()
             {
-                Content = orderDetailPage
+                Content = dataAnalysisPage
             };
+        }
+
+        private void exitClick(object sender, RoutedEventArgs e)
+        {
+            LoginWindow lw = new LoginWindow();
+            this.Close();           
+            lw.Show();
         }
     }
 }

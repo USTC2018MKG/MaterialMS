@@ -15,9 +15,9 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Background="#FF19AA8D" Foreground="#FFFAFDFC" FontSize="36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">物料管理</Label>
-        <Grid Grid.Row="0" Grid.Column="1" Background="#FF19AA8D">
-            <Button Background="#FF19AA8D" BorderBrush="{x:Null}" FontSize="14" Foreground="White" Width="70" HorizontalAlignment="Right" Margin="0,0,20,0" Height="32" VerticalAlignment="Center">
+        <Label Grid.Row="0" Grid.Column="0" Background="#FF6CABEE" Foreground="#FFFAFDFC" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="物料管理" Margin="0,0,0.4,0.2" ></Label>
+        <Grid Grid.Row="0" Grid.Column="1" Background="#FF6CABEE">
+            <Button Background="#FF6CABEE" BorderBrush="{x:Null}" FontSize="14" Foreground="White" Width="70" HorizontalAlignment="Right" Margin="0,0,20,0" Height="32" VerticalAlignment="Center" Click="exitClick">
                 退出登录
             </Button>
         </Grid>
@@ -27,18 +27,19 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Foreground="White" Background="Black" BorderBrush="White" FontSize="20" Click="userPageClick">用户管理
+            <Button Grid.Row="0" Grid.Column="0" Foreground="White" Background="#FF6CABEE" BorderBrush="White" FontSize="16" Click="userPageClick">用户管理
             </Button>
-            <Button Grid.Row="1" Grid.Column="0" Background="Black" BorderBrush="White" Foreground="White" FontSize="20" Click="materialClick">物料管理
+            <Button Grid.Row="1" Grid.Column="0" Background="#FF6CABEE" BorderBrush="White" Foreground="White" FontSize="16" Click="materialClick">物料管理
             </Button>
-            <Button Grid.Row="2" Grid.Column="0" BorderBrush="#FFFBF9F9" Foreground="White" Background="#FF020202" FontSize="20" Click="orderPageClick">订单管理
+            <Button Grid.Row="2" Grid.Column="0" BorderBrush="White" Foreground="White" Background="#FF5BA4F1" FontSize="16" Click="orderPageClick">订单管理
             </Button>
-            <Button Grid.Row="3" Grid.Column="0" Background="#FF0E0D0D" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="20" Click="orderDetPageClick">订单详情
+            <Button Grid.Row="3" Grid.Column="0" Background="#FF6CABEE" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="16" Click="dataAnalysisClick">数据统计
             </Button>
         </Grid>
-        <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Background="AliceBlue" Name="ContentControl">
+        <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Background="#FF286294" Name="ContentControl" FontFamily="Modern No. 20">
+            <Label Content="Welcome to MMS" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.3"  FontSize="36" Background="#FFD7E3F4" FontFamily="Tiger Expert" Margin="0,0,0.2,0.2" FontWeight="Bold" />
         </ContentControl>
     </Grid>
 </Window>

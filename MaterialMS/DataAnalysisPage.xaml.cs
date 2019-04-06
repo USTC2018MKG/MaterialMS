@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MaterialMS
 {
     /// <summary>
-    /// OrderDetailPage.xaml 的交互逻辑
+    /// DataAnalysisPage.xaml 的交互逻辑
     /// </summary>
-    public partial class OrderDetailPage : Page
+    public partial class DataAnalysisPage : Page
     {
-        public OrderDetailPage()
+        public DataAnalysisPage()
         {
             InitializeComponent();
         }

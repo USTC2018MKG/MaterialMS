@@ -19,13 +19,12 @@
             <TextBox  HorizontalAlignment="Left"   TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120" Name="txtId"/>
 
             <Button  Content="搜  索"  Margin="20,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="Search_Click" />
+            <Button Content="添  加"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
             <Label Name="labSearchMsg" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
         </StackPanel>
 
         <StackPanel Margin="20" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="添  加"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
-            <Button Content="修  改"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Modify_Click"/>
-            <Button Content="删  除"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
+            
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Top"  Name="dg1" SelectedCellsChanged="Dg1_SelectedCellsChanged" Background="#FF19AA8D" BorderBrush="White"  >
@@ -55,13 +54,13 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="姓名" Binding="{Binding Path=user_name}" />
-                <DataGridTextColumn Header="编号" Binding="{Binding Path=emplyee_id}"/>
-                <DataGridTextColumn Header="性别" Binding="{Binding Path=sex}"/>
-                <DataGridTextColumn Header="年龄" Binding="{Binding Path=age}"/>
-                <DataGridTextColumn Header="电话号码" Binding="{Binding Path=phone}"/>
-                <DataGridTextColumn Header="是否在职" Binding="{Binding Path=state}"/>
-                <DataGridTextColumn Header="员工类型" Binding="{Binding Path=type}"/>
+                <DataGridTextColumn Header="姓名" Binding="{Binding Path=user_name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="编号" Binding="{Binding Path=emplyee_id}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding Path=sex}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="年龄" Binding="{Binding Path=age}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="电话号码" Binding="{Binding Path=phone}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="是否离职" Binding="{Binding Path=state}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="员工类型" Binding="{Binding Path=type}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="修改">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

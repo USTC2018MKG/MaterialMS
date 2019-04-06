@@ -20,8 +20,10 @@ namespace MaterialMS
     /// </summary>
     public partial class UserRegistWindow : Window
     {
-        public UserRegistWindow()
+        private UserManagePage up;
+        public UserRegistWindow(UserManagePage up)
         {
+            this.up = up;
             InitializeComponent();
         }
 
@@ -72,6 +74,7 @@ namespace MaterialMS
                     if (result != 0)
                     {
                         MessageBox.Show("插入成功!");
+                        up.getUserTable();
                     }
                     else
                     {
