@@ -103,7 +103,48 @@ namespace MaterialMS
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            if (user != null)
+            {
+                string name = user.name;
+                string msg = "确定要删除用户" + name + "吗？";
 
+                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
+                string sql = string.Format("delete from user where emplyee_id='{0}'",user.emplyee_id);
+                
+                //MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                MessageBoxResult dr = MessageBox.Show(msg, "删除用户", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (dr == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand(sql, conn);
+                        int result = cmd.ExecuteNonQuery();
+                        if (result != 0)
+                        {
+                            MessageBox.Show("删除成功!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("删除失败!");
+                        }
+                    }
+                    catch (MySqlException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        MessageBox.Show("插入失败!");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                        getUserTable();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请点击要删除的用户行!");
+            }
         }
 
         private void getUserTable() {
@@ -131,7 +172,7 @@ namespace MaterialMS
             DataRowView rowSelected = dg1.SelectedItem as DataRowView;
             if (rowSelected != null) {
                 user = new User();                
-                user.emplyee_id = rowSelected["emplyee_id"].ToString(); ;
+                user.emplyee_id = rowSelected["emplyee_id"].ToString();
                 user.name = rowSelected["user_name"].ToString();
                 user.phone = rowSelected["phone"].ToString();
                 user.sex = rowSelected["sex"].ToString();

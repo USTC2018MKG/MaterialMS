@@ -65,7 +65,16 @@
                 <DataGridTemplateColumn Header="修改">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding Path=edit}" Click="Edit_Click">修改
+                            <Button Command="{Binding Path=edit}" Click="Modify_Click">修改
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="删除">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Path=edit}" Click="Delete_Click">删除
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
