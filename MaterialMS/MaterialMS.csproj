@@ -89,6 +89,10 @@
     <Compile Include="material\MaterialRegistWindow.xaml.cs">
       <DependentUpon>MaterialRegistWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="order\Order.cs" />
+    <Compile Include="order\OrderDetailWindow.xaml.cs">
+      <DependentUpon>OrderDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="order\OrderFormPage.xaml.cs">
       <DependentUpon>OrderFormPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="material\MaterialRegistWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="order\OrderDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

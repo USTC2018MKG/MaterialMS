@@ -178,7 +178,6 @@ namespace MaterialMS
                 user.phone = rowSelected["phone"].ToString();
                 user.sex = rowSelected["sex"].ToString();
                 user.age = rowSelected["age"].ToString();
-
             }
             
         }
