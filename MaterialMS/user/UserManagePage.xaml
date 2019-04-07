@@ -24,7 +24,18 @@
         </StackPanel>
 
         <StackPanel Margin="20" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-            
+        </StackPanel>
+
+        <StackPanel Margin="0" DockPanel.Dock="Bottom" Orientation="Horizontal"  Height="28" RenderTransformOrigin="0.5,0.5">
+            <Button  Content="上一页"  Margin="260,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="LastPage_Click" />
+            <Label Content="第" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <TextBox Margin="10,0,0,0" Width="40" VerticalAlignment="Center" Name="current_num"/>
+            <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Button  Content="下一页"  Margin="10,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="NextPage_Click" />
+            <Label Content="转到" Margin="30,0,0,0" VerticalAlignment="Center"/>
+            <TextBox Margin="10,0,0,0" Width="40" VerticalAlignment="Center" Name="go_num"/>
+            <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Button  Content="前往"  Margin="10,0,0,0" Padding="10,0,10,0" Width="50"  VerticalAlignment="Center" Click="Go_Click" />
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Top"  Name="dg1" SelectedCellsChanged="Dg1_SelectedCellsChanged" Background="#FF19AA8D" BorderBrush="White"  >
@@ -80,6 +91,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
     </DockPanel>
 
 
