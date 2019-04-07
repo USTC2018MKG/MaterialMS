@@ -73,33 +73,33 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constant.cs" />
-    <Compile Include="DataAnalysisPage.xaml.cs">
+    <Compile Include="dataanalysis\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Material.cs" />
-    <Compile Include="MaterialManagePage.xaml.cs">
+    <Compile Include="material\Material.cs" />
+    <Compile Include="material\MaterialManagePage.xaml.cs">
       <DependentUpon>MaterialManagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MaterialRegistWindow.xaml.cs">
+    <Compile Include="material\MaterialRegistWindow.xaml.cs">
       <DependentUpon>MaterialRegistWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrderFormPage.xaml.cs">
+    <Compile Include="order\OrderFormPage.xaml.cs">
       <DependentUpon>OrderFormPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
-    <Compile Include="UserManagePage.xaml.cs">
+    <Compile Include="user\User.cs" />
+    <Compile Include="user\UserManagePage.xaml.cs">
       <DependentUpon>UserManagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserModifyWindow.xaml.cs">
+    <Compile Include="user\UserModifyWindow.xaml.cs">
       <DependentUpon>UserModifyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserRegistWindow.xaml.cs">
+    <Compile Include="user\UserRegistWindow.xaml.cs">
       <DependentUpon>UserRegistWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="DataAnalysisPage.xaml">
+    <Page Include="dataanalysis\DataAnalysisPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,27 +119,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MaterialManagePage.xaml">
+    <Page Include="material\MaterialManagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MaterialRegistWindow.xaml">
+    <Page Include="material\MaterialRegistWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrderFormPage.xaml">
+    <Page Include="order\OrderFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserManagePage.xaml">
+    <Page Include="user\UserManagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserModifyWindow.xaml">
+    <Page Include="user\UserModifyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserRegistWindow.xaml">
+    <Page Include="user\UserRegistWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
