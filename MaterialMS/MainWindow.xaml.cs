@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialMS.input;
+using MaterialMS.output;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,8 @@ namespace MaterialMS
         UserManagePage userManagePage;
         MaterialManagePage materialManagePage;
         DataAnalysisPage dataAnalysisPage;
-        OrderFormPage orderFormPage;
+        InFormPage inFormPage;
+        OutFormPage outFormPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,12 +49,22 @@ namespace MaterialMS
                 Content = materialManagePage
             };
         }
-        private void orderPageClick(object sender, RoutedEventArgs e)
+
+        private void inputPageClick(object sender, RoutedEventArgs e)
         {           
-            orderFormPage = new OrderFormPage();
+            inFormPage = new InFormPage();
             ContentControl.Content = new Frame()
             {
-                Content = orderFormPage
+                Content = inFormPage
+            };
+        }
+
+        private void outputPageClick(object sender, RoutedEventArgs e)
+        {
+            outFormPage = new OutFormPage();
+            ContentControl.Content = new Frame()
+            {
+                Content = outFormPage
             };
         }
 

@@ -1,5 +1,4 @@
-﻿using MaterialMS.order;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,16 +15,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MaterialMS
+namespace MaterialMS.output
 {
     /// <summary>
-    /// OrderFormPage.xaml 的交互逻辑
+    /// OutFormPage.xaml 的交互逻辑
     /// </summary>
-    public partial class OrderFormPage : Page
-    {
-        private Order order;
-        OrderDetailWindow orderDetailWindow;
-        public OrderFormPage()
+    public partial class OutFormPage : Page
+{
+        private Out output;
+        OutDetailWindow outDetailWindow;
+        public OutFormPage()
         {
             InitializeComponent();
             getInOrderTable();
@@ -33,17 +32,18 @@ namespace MaterialMS
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if (tbForSearch.Text.Trim() == "") {
+            if (tbForSearch.Text.Trim() == "")
+            {
                 tblSearchMsg.Text = "请输入零件名或零件编号!";
                 tbForSearch.Focus();
                 return;
             }//按照零件名查询
-            else 
+            else
             {
                 tblSearchMsg.Text = "";
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from in_order where in_id = '{0}'", tbForSearch.Text.Trim());
+                string sql = string.Format("select * from in_order where out_id = '{0}'", tbForSearch.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接
@@ -66,21 +66,21 @@ namespace MaterialMS
 
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView rowSelected = lvOrders.SelectedItem as DataRowView;
             lvOrders.SelectedItem = ((Button)sender).DataContext;
+            DataRowView rowSelected = lvOrders.SelectedItem as DataRowView;
             if (rowSelected != null)
             {
-                order = new Order();
-                order.in_id = rowSelected["in_id"].ToString();
-                orderDetailWindow = new OrderDetailWindow(order);
-                orderDetailWindow.Show();
+                output = new Out();
+                output.out_id = rowSelected["out_id"].ToString();
+                outDetailWindow = new OutDetailWindow(output);
+                outDetailWindow.Show();
             }
         }
 
         public void getInOrderTable()
         {
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-            string sql = string.Format("select * from in_order");
+            string sql = string.Format("select * from out_order");
             try
             {
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -101,7 +101,7 @@ namespace MaterialMS
 
         private void ordersItemClick(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
     }
 }

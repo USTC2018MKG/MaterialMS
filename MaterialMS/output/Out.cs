@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaterialMS.order
+namespace MaterialMS.output
 {
-    public class Order
+  public class Out
     {
-        public String in_id { get; set; }
+        public String out_id { get; set; }
     }
 }

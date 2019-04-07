@@ -89,12 +89,19 @@
     <Compile Include="material\MaterialRegistWindow.xaml.cs">
       <DependentUpon>MaterialRegistWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="order\Order.cs" />
-    <Compile Include="order\OrderDetailWindow.xaml.cs">
-      <DependentUpon>OrderDetailWindow.xaml</DependentUpon>
+    <Compile Include="input\In.cs" />
+    <Compile Include="input\InDetailWindow.xaml.cs">
+      <DependentUpon>InDetailWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="order\OrderFormPage.xaml.cs">
-      <DependentUpon>OrderFormPage.xaml</DependentUpon>
+    <Compile Include="input\InFormPage.xaml.cs">
+      <DependentUpon>InFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="output\Out.cs" />
+    <Compile Include="output\OutDetailWindow.xaml.cs">
+      <DependentUpon>OutDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="output\OutFormPage.xaml.cs">
+      <DependentUpon>OutFormPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="user\User.cs" />
     <Compile Include="user\UserManagePage.xaml.cs">
@@ -138,11 +145,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="order\OrderDetailWindow.xaml">
+    <Page Include="input\InDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="order\OrderFormPage.xaml">
+    <Page Include="input\InFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="output\OutDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="output\OutFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
