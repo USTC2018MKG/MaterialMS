@@ -44,7 +44,7 @@ namespace MaterialMS
                 labSearchMsg.Content = "";
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from user where user_name = '{0}'", txtName.Text.Trim());
+                string sql = string.Format("select * from user where user_name = '{0}' order by user_name", txtName.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -69,7 +69,7 @@ namespace MaterialMS
             {
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from user where emplyee_id = '{0}'", txtId.Text.Trim());
+                string sql = string.Format("select * from user where emplyee_id = '{0}' order by user_name", txtId.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -96,8 +96,7 @@ namespace MaterialMS
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {           
             UserModifyWindow umw = new UserModifyWindow(user,this);
             umw.Show();
             getUserTable();
@@ -151,7 +150,7 @@ namespace MaterialMS
 
         public void getUserTable() {
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-            string sql = string.Format("select * from user");
+            string sql = string.Format("select * from user order by user_name");
             try
             {
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句

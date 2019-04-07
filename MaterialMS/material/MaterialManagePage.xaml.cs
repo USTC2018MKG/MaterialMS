@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MaterialMS.material;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,7 +44,7 @@ namespace MaterialMS
                 labSearchMsg.Content = "";
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from material where mname = '{0}'", txtMname.Text.Trim());
+                string sql = string.Format("select * from material where mname = '{0}' order by mname", txtMname.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接
@@ -67,7 +68,7 @@ namespace MaterialMS
             {
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from material where mid = '{0}'", txtMid.Text.Trim());
+                string sql = string.Format("select * from material where mid = '{0}' order by mname", txtMid.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -94,12 +95,14 @@ namespace MaterialMS
 
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
-
+            MaterialModifyWindow mmw = new MaterialModifyWindow(material,this);
+            mmw.Show();
+            getMaterialTable();
         }
 
         public void getMaterialTable(){
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-            string sql = string.Format("select * from material");
+            string sql = string.Format("select * from material order by mname");
             try
             {
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句

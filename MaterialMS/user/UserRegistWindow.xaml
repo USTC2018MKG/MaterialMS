@@ -7,23 +7,37 @@
         mc:Ignorable="d"
         Title="UserRegistWindow" Height="450" Width="800">
     <Grid>
-        <Grid>
-            <Label Content="员工编号" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="60" />
-            <Label Content="员工姓名" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
-            <Label Content="员工性别" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
-            <Label Content="员工年龄" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
-            <Label Content="电话号码" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
-            <TextBox HorizontalAlignment="Left" Height="26" Margin="99,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtId"/>
-            <TextBox HorizontalAlignment="Left" Height="26" Margin="99,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtName"/>
-            <TextBox HorizontalAlignment="Left" Height="26" Margin="99,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtAge"/>
-            <TextBox HorizontalAlignment="Left" Height="26" Margin="99,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtPhone"/>
-            <RadioButton Content="男" HorizontalAlignment="Left" Margin="119,96,0,0" VerticalAlignment="Top" Name="txtSex" IsChecked="True"/>
-            <RadioButton Content="女" HorizontalAlignment="Left" Margin="179,96,0,0" VerticalAlignment="Top"/>
-            <Button Content="注      册" HorizontalAlignment="Left" Margin="68,234,0,0" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.181,0.309" Click="Button_Regist"/>
-            <Label  HorizontalAlignment="Left" Height="26" Margin="277,10,0,0" VerticalAlignment="Top" Width="150" Name="labIdMsg"/>
-            <Label  HorizontalAlignment="Left" Height="26" Margin="277,169,0,0" VerticalAlignment="Top" Width="150" Name="labPhoneMsg"/>
-            <Label  HorizontalAlignment="Left" Height="26" Margin="277,129,0,0" VerticalAlignment="Top" Width="150" Name="labAgeMsg"/>
-            <Label  HorizontalAlignment="Left" Height="26" Margin="277,50,0,0" VerticalAlignment="Top" Width="150" Name="labNameMsg"/>
-        </Grid>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Background="#FFEAE8E8">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
+                <Label HorizontalAlignment="Center" Content="员工编号" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtId"/>
+                <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labIdMsg"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <Label HorizontalAlignment="Center" Content="员工姓名" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtName"/>
+                <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labNameMsg"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="员工性别" RenderTransformOrigin="0.543,0.519" Width="60" Margin="20,0,0,0" VerticalAlignment="Top" />
+                <RadioButton Content="男" Margin="20,10,0,0" VerticalAlignment="Top" IsChecked="True" x:Name="txtSex"/>
+                <RadioButton Content="女" Margin="10,10,0,0" VerticalAlignment="Top" />
+                <Label Height="26" Margin="20,0,0,0" VerticalAlignment="Top" Width="160" />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="员工年龄" HorizontalAlignment="Center" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                <TextBox HorizontalAlignment="Center" Margin="20,0,0,0" Height="26" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtAge"/>
+                <Label  HorizontalAlignment="Center" Margin="10,0,0,0" Height="26" VerticalAlignment="Top" Width="150" Name="labAgeMsg"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="电话号码" HorizontalAlignment="Center" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                <TextBox Height="26"  TextWrapping="Wrap"  Margin="20,0,0,0" Text="" VerticalAlignment="Top" Width="150" Name="txtPhone"/>
+                <Label  HorizontalAlignment="Center" Height="26"  Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labPhoneMsg"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Content="注       册" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.181,0.309" Click="Button_Regist"/>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </Window>

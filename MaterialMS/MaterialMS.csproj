@@ -83,6 +83,9 @@
     <Compile Include="material\MaterialManagePage.xaml.cs">
       <DependentUpon>MaterialManagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="material\MaterialModifyWindow.xaml.cs">
+      <DependentUpon>MaterialModifyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="material\MaterialRegistWindow.xaml.cs">
       <DependentUpon>MaterialRegistWindow.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="material\MaterialManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="material\MaterialModifyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,21 +13,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MaterialMS
+namespace MaterialMS.material
 {
     /// <summary>
-    /// MaterialRegistWindow.xaml 的交互逻辑
+    /// MaterialModifyWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MaterialRegistWindow : Window
+    public partial class MaterialModifyWindow : Window
     {
+        private Material material;
         private MaterialManagePage mp;
-        public MaterialRegistWindow(MaterialManagePage mp)
+
+        public MaterialModifyWindow(Material material, MaterialManagePage mp)
         {
-            this.mp = mp;
             InitializeComponent();
+            this.material = material;
+            this.mp = mp;
+            InitWindow();
         }
 
-        private void Regist_Click(object sender, RoutedEventArgs e)
+        private void Modify_Click(object sender, RoutedEventArgs e)
         {
             if (txtMname.Text.Trim() == "")
             {
@@ -57,9 +61,7 @@ namespace MaterialMS
             {
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string uuid = System.Guid.NewGuid().ToString("N");
-  
-                string sql = string.Format("insert into material (mid,mname,repository_id,rest,category_id,price) values('{0}','{1}','{2}','{3}','{4}','{5}')", uuid, txtMname.Text.Trim(), txtRepository.Text.Trim(), txtRest.Text.Trim(), txtCategory.Text.Trim(),txtPrice.Text.Trim());
+                string sql = string.Format("update material set mname='{0}',repository_id='{1}',rest='{2}',category_id='{3}',price='{4}' where mid='{5}'", txtMname.Text.Trim(), txtRepository.Text.Trim(), txtRest.Text.Trim(), txtCategory.Text.Trim(), txtPrice.Text.Trim(),material.mid);
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -73,12 +75,12 @@ namespace MaterialMS
                     }
                     else
                     {
-                        MessageBox.Show("插入失败!");                      
+                        MessageBox.Show("插入失败!");
                         txtMname.Text = "";
                         txtRepository.Text = "";
                         txtRest.Text = "";
                         txtCategory.Text = "";
-                        txtPrice.Text = "";                       
+                        txtPrice.Text = "";
                     }
                 }
                 catch (MySqlException ex)
@@ -97,6 +99,14 @@ namespace MaterialMS
                 }
             }
         }
+
+        private void InitWindow()
+        {
+            txtMname.Text = material.mname;
+            txtRepository.Text = material.repository_id;
+            txtRest.Text = material.rest;
+            txtCategory.Text = material.category_id;
+            txtPrice.Text = material.price;
+        }
     }
 }
-
