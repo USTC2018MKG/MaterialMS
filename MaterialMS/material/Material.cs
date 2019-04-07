@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaterialMS
 {
-    class Material
+    public class Material
     {
         public String mid{ get; set; }
         public String mname { get; set; }
