@@ -151,6 +151,7 @@ namespace MaterialMS
         public void getUserTable() {
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             string sql = string.Format("select * from user order by user_name");
+            
             try
             {
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -158,6 +159,7 @@ namespace MaterialMS
                 DataSet ds = new DataSet();
                 md.Fill(ds);
                 dg1.ItemsSource = ds.Tables[0].AsDataView();
+                
             }
             catch (MySqlException ex)
             {
@@ -182,7 +184,20 @@ namespace MaterialMS
             
         }
 
-        
+        private void LastPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Go_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
