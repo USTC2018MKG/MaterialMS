@@ -74,7 +74,7 @@ namespace MaterialMS
                     if (result != 0)
                     {
                         MessageBox.Show("插入成功!");
-                        up.getUserTable();
+                        up.getUserTable(1);
                     }
                     else
                     {

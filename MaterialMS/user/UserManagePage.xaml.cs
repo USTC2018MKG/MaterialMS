@@ -24,10 +24,48 @@ namespace MaterialMS
     public partial class UserManagePage : Page
     {        
         private User user;
+        private int totalCount = 0;          //查询总数
+        private int limit = 12;          //设置每页显示记录数
+        private int totalPage;       //最大的页码数
+        private int search_type;     //全部查询为0，按用户名查询为1
+
         public UserManagePage()
         {
             InitializeComponent();
-            getUserTable();
+            getUserTable(1);
+        }
+
+        //sql分页工具类
+        public void Sqlutils(string sql_count)
+        {
+            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);            
+            try
+            {
+                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                MySqlCommand cmd = new MySqlCommand(sql_count, conn);
+                //执行查询，并返回查询结果集中第一行的第一列。所有其他的列和行将被忽略。
+                Object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    totalCount = int.Parse(result.ToString());
+                }
+                if (totalCount % limit == 0)
+                {
+                    totalPage = totalCount / limit;
+                }
+                else
+                {
+                    totalPage = totalCount / limit + 1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -42,27 +80,7 @@ namespace MaterialMS
             else if (txtId.Text.Trim() == "")
             {
                 labSearchMsg.Content = "";
-                //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string sql = string.Format("select * from user where user_name = '{0}' order by user_name", txtName.Text.Trim());
-                try
-                {
-                    conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
-                    Console.WriteLine("已经建立连接");
-                    //对数据库进行查询
-                    MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
-                    DataSet ds = new DataSet();
-                    md.Fill(ds);
-                    dg1.ItemsSource = ds.Tables[0].AsDataView();
-                }
-                catch (MySqlException ex)
-                {
-                    throw;
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                searchByName(1);
             }
             //按照ID查询
             else
@@ -73,6 +91,7 @@ namespace MaterialMS
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                    total_num.Content = 1;
                     MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                     DataSet ds = new DataSet();
                     md.Fill(ds);
@@ -88,6 +107,8 @@ namespace MaterialMS
                 }
             }
         }
+
+
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
@@ -99,7 +120,7 @@ namespace MaterialMS
         {           
             UserModifyWindow umw = new UserModifyWindow(user,this);
             umw.Show();
-            getUserTable();
+            getUserTable(1);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -138,7 +159,7 @@ namespace MaterialMS
                     finally
                     {
                         conn.Close();
-                        getUserTable();
+                        getUserTable(1);
                     }
                 }
             }
@@ -148,18 +169,57 @@ namespace MaterialMS
             }
         }
 
-        public void getUserTable() {
+        public void getUserTable(int page) {
             MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-            string sql = string.Format("select * from user order by user_name");
-            
             try
             {
-                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                string sql_count = string.Format("select count(*) from user");
+                conn.Open();//建立连接 
+                if(page == 1)
+                {
+                    Sqlutils(sql_count);
+                }
+                int begin = (page - 1) * limit;
+                total_num.Content = totalPage;
+                string sql = string.Format("select * from (select (@i:= @i+1) as rank,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i order by user_name) as new where rank>'{0}' and rank<='{1}'", begin,begin+limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
                 dg1.ItemsSource = ds.Tables[0].AsDataView();
-                
+                current_num.Content = page;  //设置当前页码
+                search_type = 0;
+            }
+            catch (MySqlException ex)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void searchByName(int page)
+        {
+            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
+            try
+            {
+                string sql_count = string.Format("select count(*) from user where user_name='{0}'", txtName.Text.Trim());
+                if (page == 1)
+                {
+                    Sqlutils(sql_count);
+                }
+                int begin = (page - 1) * limit;
+                total_num.Content = totalPage;
+                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+                string sql = string.Format("select * from (select (@i:= @i+1) as rank,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where rank>'{0}' and rank<='{1}'", begin, begin + limit, txtName.Text.Trim());
+                //对数据库进行查询
+                MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                md.Fill(ds);
+                dg1.ItemsSource = ds.Tables[0].AsDataView();
+                current_num.Content = page;
+                search_type = 1;
             }
             catch (MySqlException ex)
             {
@@ -184,19 +244,55 @@ namespace MaterialMS
             
         }
 
+        //上一页
         private void LastPage_Click(object sender, RoutedEventArgs e)
         {
+            int currentpage = (int)current_num.Content;
+            if(currentpage == 1) { return; }
+            else if(search_type == 0)
+            {
+                getUserTable(currentpage - 1);
 
+            }
+            else if (search_type == 1)
+            {
+                searchByName(currentpage - 1);
+            }
         }
 
+        //下一页
         private void NextPage_Click(object sender, RoutedEventArgs e)
         {
-
+            int currentpage = (int)current_num.Content;
+            if (currentpage == totalPage) { return; }
+            else if (search_type == 0)
+            {
+                getUserTable(currentpage + 1);
+            }
+            else if (search_type == 1)
+            {
+                searchByName(currentpage + 1);
+            }
         }
 
+        //跳转任意页
         private void Go_Click(object sender, RoutedEventArgs e)
         {
-
+            if (go_num.Text.Trim() == "") {
+                return;
+            }
+            int gopage = Convert.ToInt32(go_num.Text.Trim()); 
+            if (gopage > totalPage) { return; }
+            else if(gopage < 1) { return; }
+            else if (search_type == 0)
+            {
+                getUserTable(gopage);
+            }
+            else if (search_type == 1)
+            {
+                searchByName(gopage);
+            }
+            go_num.Text = "";
         }
     }
 }

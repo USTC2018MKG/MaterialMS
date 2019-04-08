@@ -8,6 +8,6 @@ namespace MaterialMS
 {
     public class Constant
     {
-        public static String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=GR3210123;";
+        public static String myConnectionString = "Server=localhost;Database=mms;Uid=root;Pwd=root;Allow User Variables=True;";
     }
 }
