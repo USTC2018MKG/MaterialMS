@@ -79,6 +79,7 @@ namespace MaterialMS
 
         private void exitClick(object sender, RoutedEventArgs e)
         {
+            Account.Instance.Logout();
             LoginWindow lw = new LoginWindow();
             this.Close();           
             lw.Show();

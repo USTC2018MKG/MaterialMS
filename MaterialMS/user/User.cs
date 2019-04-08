@@ -15,5 +15,7 @@ namespace MaterialMS
         public String sex { get; set; }
         public String phone { get; set; }
         public String age { get; set; }
+        public String type { get; set; }
+        public String state { get; set; }
     }
 }

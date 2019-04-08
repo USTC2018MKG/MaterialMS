@@ -23,6 +23,7 @@ namespace MaterialMS
     /// </summary>
     public partial class MaterialManagePage : Page
     {
+        private MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
         private Material material;
 
         public MaterialManagePage()
@@ -42,8 +43,6 @@ namespace MaterialMS
             else if (txtMid.Text.Trim() == "")
             {
                 labSearchMsg.Content = "";
-                //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("select * from material where mname = '{0}' order by mname", txtMname.Text.Trim());
                 try
                 {
@@ -66,8 +65,6 @@ namespace MaterialMS
             //按照ID查询
             else
             {
-                //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("select * from material where mid = '{0}' order by mname", txtMid.Text.Trim());
                 try
                 {
@@ -101,7 +98,6 @@ namespace MaterialMS
         }
 
         public void getMaterialTable(){
-            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             string sql = string.Format("select * from material order by mname");
             try
             {

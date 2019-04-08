@@ -22,7 +22,8 @@ namespace MaterialMS
     /// UserManagePage.xaml 的交互逻辑
     /// </summary>
     public partial class UserManagePage : Page
-    {        
+    {
+        private MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
         private User user;
         private int totalCount = 0;          //查询总数
         private int limit = 12;          //设置每页显示记录数
@@ -37,11 +38,9 @@ namespace MaterialMS
 
         //sql分页工具类
         public void Sqlutils(string sql_count)
-        {
-            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);            
+        {            
             try
-            {
-                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
+            { 
                 MySqlCommand cmd = new MySqlCommand(sql_count, conn);
                 //执行查询，并返回查询结果集中第一行的第一列。所有其他的列和行将被忽略。
                 Object result = cmd.ExecuteScalar();
@@ -85,8 +84,6 @@ namespace MaterialMS
             //按照ID查询
             else
             {
-                //连接数据库对象
-                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("select * from user where emplyee_id = '{0}' order by user_name", txtId.Text.Trim());
                 try
                 {
@@ -127,13 +124,26 @@ namespace MaterialMS
         {
             if (user != null)
             {
+                if (user.type.Equals("0"))
+                {
+                    if (Account.Instance.GetUser().type.Equals("0"))
+                    {
+                        MessageBox.Show("无删除超级管理员权限!");
+                        return;
+                    }
+                }
+                else if (user.type.Equals("1"))
+                {
+                    if (!Account.Instance.GetUser().type.Equals("0"))
+                    {
+                        MessageBox.Show("无删除员工权限!");
+                        return;
+                    }
+                }
                 string name = user.name;
                 string msg = "确定要删除用户" + name + "吗？";
-
-                MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string sql = string.Format("update user set state=1 where emplyee_id='{0}'", user.emplyee_id);
                 
-                //MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 MessageBoxResult dr = MessageBox.Show(msg, "删除用户", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (dr == MessageBoxResult.OK)
                 {
@@ -170,7 +180,6 @@ namespace MaterialMS
         }
 
         public void getUserTable(int page) {
-            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             try
             {
                 string sql_count = string.Format("select count(*) from user");
@@ -181,7 +190,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as rank,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i order by user_name) as new where rank>'{0}' and rank<='{1}'", begin,begin+limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i order by user_name) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
@@ -201,18 +210,17 @@ namespace MaterialMS
 
         public void searchByName(int page)
         {
-            MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
             try
             {
                 string sql_count = string.Format("select count(*) from user where user_name='{0}'", txtName.Text.Trim());
+                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                 if (page == 1)
                 {
                     Sqlutils(sql_count);
                 }
                 int begin = (page - 1) * limit;
-                total_num.Content = totalPage;
-                conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
-                string sql = string.Format("select * from (select (@i:= @i+1) as rank,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where rank>'{0}' and rank<='{1}'", begin, begin + limit, txtName.Text.Trim());
+                total_num.Content = totalPage;               
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where k>'{0}' and k<='{1}'", begin, begin + limit, txtName.Text.Trim());
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -240,6 +248,7 @@ namespace MaterialMS
                 user.phone = rowSelected["phone"].ToString();
                 user.sex = rowSelected["sex"].ToString();
                 user.age = rowSelected["age"].ToString();
+                user.type = rowSelected["type"].ToString();
             }
             
         }

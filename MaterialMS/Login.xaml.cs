@@ -56,7 +56,7 @@ namespace MaterialMS
             try
             {
                 MySqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = "select emplyee_id,user_pwd from user where emplyee_id=@username";
+                cmd.CommandText = "select * from user where emplyee_id=@username";
                 cmd.Parameters.Add(new MySqlParameter("@username", MySqlDbType.VarChar, 50));
                 cmd.Parameters["@username"].Value = txtUserName.Text;
                 MySqlDataReader sdr = cmd.ExecuteReader();
@@ -67,11 +67,35 @@ namespace MaterialMS
                     txtPwd.Password = "";
                     txtUserName.Focus();
                 }
+                
                 else if (sdr["user_pwd"].ToString().Trim() == txtPwd.Password.Trim())
                 {
-                    MainWindow Mn = new MainWindow();
-                    this.Close();
-                    Mn.Show();
+                    if (sdr["type"].ToString().Trim().Equals("2"))
+                    {
+                        labNameMsg.Content = "普通用户无访问权限！";
+                        txtUserName.Text = "";
+                        txtPwd.Password = "";
+                        txtUserName.Focus();
+                    }
+                    else
+                    {
+                        User user = new User();
+                        user.emplyee_id = sdr["emplyee_id"].ToString().Trim();
+                        user.name = sdr["user_name"].ToString().Trim();
+                        user.password = sdr["user_pwd"].ToString().Trim();
+                        user.sex = sdr["sex"].ToString().Trim();
+                        user.phone = sdr["phone"].ToString().Trim();
+                        user.state = sdr["state"].ToString().Trim();
+                        user.age = sdr["age"].ToString().Trim();
+                        user.type = sdr["type"].ToString().Trim();
+
+                        Account.Instance.Login(user);
+                        MainWindow Mn = new MainWindow();
+                        this.Close();
+                        Mn.Show();
+                    }
+
+
                 }
                 else
                 {

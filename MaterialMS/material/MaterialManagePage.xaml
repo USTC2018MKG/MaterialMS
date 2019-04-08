@@ -27,6 +27,8 @@
 
     </StackPanel>
 
+        
+      
     <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Top"  Name="dg2" SelectedCellsChanged="Dg2_SelectedCellsChanged" Background="#FF19AA8D" BorderBrush="White"  >
       <DataGrid.ColumnHeaderStyle>
         <Style TargetType="DataGridColumnHeader">
