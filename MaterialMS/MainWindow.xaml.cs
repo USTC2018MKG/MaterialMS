@@ -30,6 +30,9 @@ namespace MaterialMS
         public MainWindow()
         {
             InitializeComponent();
+            string name = Account.Instance.GetUser().name;
+            string msg = "欢迎" + name + "来到本系统!";
+            welLab.Content = msg;
         }
 
         private void userPageClick(object sender, RoutedEventArgs e)

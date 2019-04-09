@@ -126,17 +126,14 @@ namespace MaterialMS
             {
                 if (user.type.Equals("0"))
                 {
-                    if (Account.Instance.GetUser().type.Equals("0"))
-                    {
-                        MessageBox.Show("无删除超级管理员权限!");
-                        return;
-                    }
+                    MessageBox.Show("无删除超级管理员权限!");
+                    return;
                 }
                 else if (user.type.Equals("1"))
                 {
                     if (!Account.Instance.GetUser().type.Equals("0"))
                     {
-                        MessageBox.Show("无删除员工权限!");
+                        MessageBox.Show("无删除管理员权限!");
                         return;
                     }
                 }

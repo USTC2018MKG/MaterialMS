@@ -15,11 +15,13 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Background="#FF6CABEE" Foreground="#FFFAFDFC" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="物料管理" Margin="0,0,0.4,0.2" ></Label>
+        <Label Grid.Row="0" Grid.Column="0" Background="#FF6CABEE" Foreground="#FFFAFDFC" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="物料管理系统" Margin="0,0,0.4,0.2" ></Label>
         <Grid Grid.Row="0" Grid.Column="1" Background="#FF6CABEE">
-            <Button Background="#FF6CABEE" BorderBrush="{x:Null}" FontSize="14" Foreground="White" Width="70" HorizontalAlignment="Right" Margin="0,0,20,0" Height="32" VerticalAlignment="Center" Click="exitClick">
+
+            <Button Background="#FF6CABEE" BorderBrush="{x:Null}" FontSize="14" Foreground="White" Width="80" HorizontalAlignment="Right" Margin="0,0,20,0" Height="25" VerticalAlignment="Bottom" Click="exitClick">
                 退出登录
             </Button>
+            <Label Foreground="White" HorizontalContentAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Center"  Width="200" Height="25"  Name="welLab"/>
         </Grid>
         <Grid Grid.Row="1" Margin="10,10,0,10">
             <Grid.RowDefinitions>
