@@ -11,8 +11,8 @@
     <Page.Resources>
         <DataTemplate x:Key="materialHeaderTemplate">
             <TextBlock 
-                Padding="10" 
-                FontSize="16" 
+                Padding="3" 
+                FontSize="12" 
                 Width="80"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center" TextAlignment="Center">
@@ -33,18 +33,18 @@
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
                 Text="编号" 
-                FontSize="18"/>
+                FontSize="12"/>
 
             <TextBox 
-                FontSize="18"
+                FontSize="12"
                 MaxLines="1"
                 Name="tbForSearch"
                 VerticalContentAlignment="Center"
-                Margin="30,0,30,0" Height="48" Width="200"/>
+                Margin="30,0,30,0" Height="35" Width="200"/>
 
             <Button 
                 Style="{StaticResource commonButton}"
-                FontSize="18"
+                FontSize="12"
                 HorizontalAlignment="Right"
                 Content="搜索" Click="SearchClick"/>
 
@@ -52,90 +52,73 @@
                 Margin="20,0,0,0"
                 VerticalAlignment="Center" 
                 Name="tblSearchMsg"
-                FontSize="18"/>
+                FontSize="12"/>
 
         </StackPanel>
 
-        <Grid DockPanel.Dock="Bottom" Height="52" Visibility="Hidden">
-
+        <StackPanel Margin="0" DockPanel.Dock="Bottom" Orientation="Horizontal"  Height="28" RenderTransformOrigin="0.5,0.5">
+            <Button  Content="上一页" Background="#FF6CABEE" Foreground="White" Margin="200,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="LastPage_Click" />
+            <Label Content="第" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Label  Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" VerticalAlignment="Center" Name="current_num"/>
+            <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Label Content="共" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Label  Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" VerticalAlignment="Center" Name="total_num"/>
+            <Label Content="页" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Button  Content="下一页" Background="#FF6CABEE" Foreground="White" Margin="10,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="NextPage_Click" />
+            <Label Content="转到" Margin="30,0,0,0" VerticalAlignment="Center"/>
+            <TextBox Margin="10,0,0,0" Width="40" HorizontalContentAlignment="Center"  VerticalAlignment="Center" Name="go_num"/>
+            <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Button  Content="前往" Background="#FF6CABEE" Foreground="White" Margin="10,0,0,0" Padding="10,0,10,0" Width="50"  VerticalAlignment="Center" Click="Go_Click" />
+        </StackPanel>
+        <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="4*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button
-                HorizontalAlignment="Right"
-                Background="#FF053364" 
-                Foreground="White" 
-                Content="上一页" 
-                Grid.Column="0" 
-                Width="100" 
-                Height="40"/>
-
-            <TextBlock
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Text="当前页:" 
-                FontSize="20" 
-                Grid.Column="1"  />
-
-            <TextBlock
-                TextWrapping="Wrap"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Margin="20,0,0,0"
-                Text="20" 
-                FontSize="20" 
-                Grid.Column="2" RenderTransformOrigin="-1.997,0.645"  />
-
-            <Button 
-                HorizontalAlignment="Left"
-                Background="#FF053364" 
-                Foreground="White" 
-                Content="下一页" 
-                Grid.Column="3" 
-                Width="100" 
-                Height="40"/>
-        </Grid>
-
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" x:Name="column1"/>
+                <Grid Grid.Column="1" x:Name="column2"/>
+                <Grid Grid.Column="2" x:Name="column3"/>
+                <Grid Grid.Column="3" x:Name="column4"/>
+            </Grid>
         <ListView
             Name="lvOrders" SelectionChanged="ordersItemClick">
             <ListView.View>
                 <GridView ColumnHeaderTemplate="{StaticResource materialHeaderTemplate}" AllowsColumnReorder="True">
 
-                    <GridViewColumn Header="编号" Width="Auto">
+                        <GridViewColumn Header="编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock                                  
+                                <TextBlock  
+                                    Width="{Binding ElementName=column1,Path=ActualWidth}"
                                     TextAlignment="Center"
-                                    FontSize="18" HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Text="{Binding in_id}"/>
+                                    FontSize="12" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Text="{Binding out_id}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="时间"  Width="Auto">
+                        <GridViewColumn Header="时间"  Width="{Binding ElementName=column2,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock FontSize="18" TextAlignment="Center" Text="{Binding in_time}"/>
+                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding out_time}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="员工编号">
+                        <GridViewColumn  Header="员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock FontSize="18" Text="{Binding employee_id}"/>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding employee_id}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="订单详情">
+                        <GridViewColumn  Header="订单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button FontSize="15" Content="订单详情" Command="{Binding Path=detail}" Foreground="White" Background="#FF053364" Click="Detail_Click"/>
+                                <Button Width="{Binding ElementName=column4,Path=ActualWidth}" FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

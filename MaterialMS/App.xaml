@@ -18,10 +18,9 @@
             <Setter Property="Button.FontFamily" Value="Microsoft YaHei Light"/>
             <Setter Property="Button.FontSize" Value="20"/>
             <Setter Property="Button.Foreground" Value="White"/>
-            <Setter Property="Button.Background" Value="#FF053364"/>
-            <Setter Property="Button.Padding" Value="40,10,40,10"/>
-            <Setter Property="Button.Height" Value="52"/>
-            <Setter Property="Button.Width" Value="150"/>
+            <Setter Property="Button.Background" Value="#FF6CABEE"/>
+            <Setter Property="Button.Height" Value="30"/>
+            <Setter Property="Button.Width" Value="80"/>
         </Style>
     </Application.Resources>
 </Application>
