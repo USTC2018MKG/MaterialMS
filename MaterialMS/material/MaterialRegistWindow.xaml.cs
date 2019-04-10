@@ -29,7 +29,13 @@ namespace MaterialMS
 
         private void Regist_Click(object sender, RoutedEventArgs e)
         {
-            if (txtMname.Text.Trim() == "")
+            if (txtId.Text.Trim() == "")
+            {
+                labIdMsg.Content = "请输入零件编号!";
+                txtId.Focus();
+                return;
+            }
+            else if (txtMname.Text.Trim() == "")
             {
                 labMnameMsg.Content = "请输入零件名称!";
                 txtMname.Focus();
@@ -57,9 +63,8 @@ namespace MaterialMS
             {
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
-                string uuid = System.Guid.NewGuid().ToString("N");
   
-                string sql = string.Format("insert into material (mid,mname,repository_id,rest,category_id,price) values('{0}','{1}','{2}','{3}','{4}','{5}')", uuid, txtMname.Text.Trim(), txtRepository.Text.Trim(), txtRest.Text.Trim(), txtCategory.Text.Trim(),txtPrice.Text.Trim());
+                string sql = string.Format("insert into material (mid,mname,repository_id,rest,category_id,price) values('{0}','{1}','{2}','{3}','{4}','{5}')", txtId.Text.Trim(), txtMname.Text.Trim(), txtRepository.Text.Trim(), txtRest.Text.Trim(), txtCategory.Text.Trim(),txtPrice.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句

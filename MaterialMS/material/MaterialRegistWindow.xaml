@@ -11,6 +11,12 @@
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Background="#FFEAE8E8">
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
+                    <Label HorizontalAlignment="Center" Content="零件编号" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                    <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtId"/>
+                    <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labIdMsg"/>
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
                     <Label HorizontalAlignment="Center" Content="零件名称" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
                     <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtMname"/>
                     <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labMnameMsg"/>
