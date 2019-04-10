@@ -21,15 +21,27 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListView
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="column1"/>
+            <Grid Grid.Column="1" x:Name="column2"/>
+            <Grid Grid.Column="2" x:Name="column3"/>
+        </Grid>
+        <Grid>
+            <ListView
             Name="lvOrderDetail">
                 <ListView.View>
                     <GridView ColumnHeaderTemplate="{StaticResource orderHeaderTemplate}" >
 
-                        <GridViewColumn Header="编号">
+                        <GridViewColumn Header="编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock                                   
+                                    <TextBlock
+                                    Width="{Binding ElementName=column1,Path=ActualWidth}"
                                     TextAlignment="Center"
                                     FontSize="18" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Text="{Binding item_id}"/>
@@ -37,18 +49,18 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="物料编号" >
+                        <GridViewColumn Header="物料编号" Width="{Binding ElementName=column2,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="18" TextAlignment="Center" Text="{Binding mid}"/>
+                                    <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="18" TextAlignment="Center" Text="{Binding mid}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn  Header="数量" >
+                        <GridViewColumn  Header="数量" Width="{Binding ElementName=column3,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="18" Text="{Binding num}"/>
+                                    <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="18" Text="{Binding num}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -56,6 +68,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        
+        </Grid>
     </Grid>
 </Window>

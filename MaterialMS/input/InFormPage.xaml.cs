@@ -33,12 +33,13 @@ namespace MaterialMS.input
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if (tbForSearch.Text.Trim() == "") {
+            if (tbForSearch.Text.Trim() == "")
+            {
                 tblSearchMsg.Text = "请输入零件名或零件编号!";
                 tbForSearch.Focus();
                 return;
             }//按照零件名查询
-            else 
+            else
             {
                 tblSearchMsg.Text = "";
                 //连接数据库对象
@@ -67,7 +68,7 @@ namespace MaterialMS.input
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
             lvOrders.SelectedItem = ((Button)sender).DataContext;
-            DataRowView rowSelected = lvOrders.SelectedItem as DataRowView;            
+            DataRowView rowSelected = lvOrders.SelectedItem as DataRowView;
             if (rowSelected != null)
             {
                 input = new In();
@@ -101,7 +102,30 @@ namespace MaterialMS.input
 
         private void ordersItemClick(object sender, SelectionChangedEventArgs e)
         {
-           
+
+        }
+        //上一页
+        private void LastPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //下一页
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //跳转任意页
+        private void Go_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //sql分页工具类
+        public void Sqlutils(string sql_count)
+        {
+
         }
     }
 }

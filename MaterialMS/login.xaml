@@ -8,16 +8,70 @@
         Title="管理员登录" Height="450" Width="800">
     
     <Grid>
-        <Label Content="用户名" HorizontalAlignment="Left" Margin="291,142,0,0" VerticalAlignment="Top" />
-        <Label Content="密码" HorizontalAlignment="Left" Margin="295,182,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="344,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtUserName"/>
-        <Button Content="登录" HorizontalAlignment="Left" Margin="360,244,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <Label Name="labNameMsg" HorizontalAlignment="Left" Margin="495,142,0,0" VerticalAlignment="Top"/>
-        <Label Name="labPwdMsg" HorizontalAlignment="Left" Margin="495,182,0,0" VerticalAlignment="Top"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="344,182,0,0" VerticalAlignment="Top" Width="120" Height="25" Name="txtPwd"/>
         <Grid.Background>
             <ImageBrush ImageSource="Resources/login_bg.png" Stretch="Fill"/>
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid HorizontalAlignment="Center"  VerticalAlignment="Center">
+                <Image  Source="Resources/logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,0.4,0.2" OpacityMask="Black" />
+            </Grid> 
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center">
+                    <Label Width="100" HorizontalContentAlignment="Center" Content="用  户  名"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <TextBox Height="25" TextWrapping="Wrap"  Width="120" HorizontalAlignment="Left"  VerticalAlignment="Center" Name="txtUserName"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Label Content="密        码" Width="100" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <PasswordBox Width="120" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Center" Name="txtPwd"/>
+                </Grid>
+            
+            </Grid>
+            
+                
+                
+            
+            <Grid Grid.Row="1">
+                <Button Content="登录" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Width="100" Click="Button_Click"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Label Name="labNameMsg" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Name="labPwdMsg" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+    
     </Grid>
 
 </Window>
