@@ -1,19 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MaterialMS.output
 {
@@ -26,7 +15,7 @@ namespace MaterialMS.output
         private MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
         OutDetailWindow outDetailWindow;
         private int totalCount = 0;          //查询总数
-        private int limit = 2;          //设置每页显示记录数
+        private int limit = 15;          //设置每页显示记录数
         private int totalPage;       //最大的页码数
         private int search_type;     //全部查询为0，按用户名查询为1
 
@@ -38,16 +27,21 @@ namespace MaterialMS.output
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if (tbForSearch.Text.Trim() == "")
+            if (tbForSearch.Text.Trim() == "" && dpYear.Text.Trim() == "")
             {
-                tblSearchMsg.Text = "请输入零件名或零件编号!";
+                tblSearchMsg.Text = "请输入订单编号或日期";
                 tbForSearch.Focus();
                 return;
             }//按照零件名查询
-            else
+            else if (tbForSearch.Text.Trim() == "")
             {
-                tblSearchMsg.Text = "";               
-                string sql = string.Format("select * from in_order where out_id = '{0}'", tbForSearch.Text.Trim());
+                tblSearchMsg.Text = "";
+                searchById(1);
+            }
+            else {
+                tblSearchMsg.Text = "";
+                //string date = Convert.ToDateTime(dpYear.Text).ToString("yyyyMMdd")
+                string sql = string.Format("select * from out_order where out_id = '{0}'", tbForSearch.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接
@@ -101,7 +95,7 @@ namespace MaterialMS.output
                 current_num.Content = page;
                 search_type = 0;
             }
-            catch (MySqlException ex)
+            catch (MySqlException e)
             {
                 throw;
             }
@@ -115,7 +109,7 @@ namespace MaterialMS.output
         {
             try
             {
-                string sql_count = string.Format("select count(*) from user where out_id='{0}'", tbForSearch.Text.Trim());
+                string sql_count = string.Format("select count(*) from out_order where out_time='{0}'", dpYear.Text.Trim());
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                 if (page == 1)
                 {
@@ -123,7 +117,7 @@ namespace MaterialMS.output
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i where out_id='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, tbForSearch.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i where out_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -132,7 +126,7 @@ namespace MaterialMS.output
                 current_num.Content = page;
                 search_type = 1;
             }
-            catch (MySqlException ex)
+            catch (MySqlException e)
             {
                 throw;
             }
@@ -220,7 +214,7 @@ namespace MaterialMS.output
                     totalPage = totalCount / limit + 1;
                 }
             }
-            catch (MySqlException ex)
+            catch (MySqlException e)
             {
                 throw;
             }

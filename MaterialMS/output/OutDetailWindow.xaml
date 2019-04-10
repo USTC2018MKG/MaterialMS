@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS.output"
         mc:Ignorable="d"
-        Title="OutDetailWindow" Height="450" Width="800">
+        Title="订单详情" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="orderHeaderTemplate">
             <TextBlock 
@@ -23,39 +23,39 @@
     <Grid>
         <ListView
             Name="lvOrderDetail">
-            <ListView.View>
-                <GridView ColumnHeaderTemplate="{StaticResource orderHeaderTemplate}">
+                <ListView.View>
+                    <GridView ColumnHeaderTemplate="{StaticResource orderHeaderTemplate}" >
 
-                    <GridViewColumn Header="编号" Width="Auto">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    
+                        <GridViewColumn Header="编号">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock                                   
                                     TextAlignment="Center"
                                     FontSize="18" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Text="{Binding item_id}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn Header="物料编号"  Width="Auto">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="18" TextAlignment="Center" Text="{Binding mid}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="物料编号" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="18" TextAlignment="Center" Text="{Binding mid}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn  Header="数量">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="18" Text="{Binding num}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn  Header="数量" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="18" Text="{Binding num}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                </GridView>
-            </ListView.View>
-        </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        
     </Grid>
 </Window>

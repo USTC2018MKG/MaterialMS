@@ -42,6 +42,17 @@
                 VerticalContentAlignment="Center"
                 Margin="30,0,30,0" Height="35" Width="200"/>
 
+            <TextBlock 
+                Text="日期"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Margin="10,0,10,0"
+                />
+            <DatePicker
+                FontSize="12"                
+                Name="dpYear"
+                VerticalContentAlignment="Center"
+                Margin="30,0,30,0" Height="35" Width="100"/>
             <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
@@ -118,7 +129,9 @@
                         <GridViewColumn  Header="订单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Width="{Binding ElementName=column4,Path=ActualWidth}" FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
+                                <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
+                                </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
