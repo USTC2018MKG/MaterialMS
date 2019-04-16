@@ -9,7 +9,7 @@
       Title="MaterialManagePage">
 
   <DockPanel >
-    <Label DockPanel.Dock="Top" Content="物料管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
+    <Label DockPanel.Dock="Top" Content="刀具管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
 
     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
       <Label Content="零件名" HorizontalAlignment="Center"  VerticalAlignment="Center"/>

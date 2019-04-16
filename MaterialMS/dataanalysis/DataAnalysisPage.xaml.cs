@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialMS.dataanalysis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace MaterialMS
         public DataAnalysisPage()
         {
             InitializeComponent();
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e) { }
+
+        private void Create_Click(object sender, RoutedEventArgs e) {
+            AddProductWindow addProductWindow = new AddProductWindow();
+            addProductWindow.Show();
+        }
+
+        private void Modify_Click(object sender, RoutedEventArgs e) { }
+
+        private void Dg2_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
         }
     }
 }
