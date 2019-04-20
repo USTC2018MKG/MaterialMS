@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS.dataanalysis"
         mc:Ignorable="d"
-        Title="AddProductWindow" Height="450" Width="800">
+        Title="AddProductWindow" Height="600" Width="800">
     <Grid>
         <Grid>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Background="#FFEAE8E8">
@@ -14,6 +14,12 @@
                     <Label HorizontalAlignment="Center" Content="产品编号" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
                     <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtId"/>
                     <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labIdMsg"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                    <Label HorizontalAlignment="Center" Content="机      床" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                    <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" />
+                    <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" />
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
@@ -26,6 +32,16 @@
                     <Label HorizontalAlignment="Center" Content="产线编号" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
                     <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtRepository"/>
                     <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labRepositoryMsg"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                    <Label HorizontalAlignment="Center" Content="预测产能" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                    <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                    <Label HorizontalAlignment="Center" Content="交货周期" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
+                    <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150"/>
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
