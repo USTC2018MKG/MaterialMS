@@ -24,6 +24,7 @@
     </Page.Resources>
 
     <DockPanel>
+        <Label DockPanel.Dock="Top" Content="出库管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
         <StackPanel 
             Height="80"
             Orientation="Horizontal" 

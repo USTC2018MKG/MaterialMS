@@ -8,92 +8,148 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserManagePage">
 
+    <Page.Resources>
+        <DataTemplate x:Key="materialHeaderTemplate">
+            <TextBlock 
+                Padding="3" 
+                FontSize="12" 
+                Width="80"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" TextAlignment="Center">
+                <TextBlock.Text>
+                    <Binding/>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+    </Page.Resources>
     <DockPanel >
         <Label DockPanel.Dock="Top" Content="用户管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
 
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Label Content="姓名" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-            <TextBox TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" Name="txtName"/>
+        <StackPanel 
+            Height="80"
+            Orientation="Horizontal" 
+            DockPanel.Dock="Top">
 
-            <Label Content="工号" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox  HorizontalAlignment="Left"   TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120" Name="txtId"/>
+            <TextBlock
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="员工名称" 
+                FontSize="12"/>
 
-            <Button  Content="搜  索"  Margin="20,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="Search_Click" />
-            <Button Content="添  加"  Margin="20,10,20,10" VerticalAlignment="Top" Width="75" Click="Create_Click"/>
-            <Label Name="labSearchMsg" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-        </StackPanel>
+            <TextBox 
+                FontSize="12"
+                MaxLines="1"
+                
+                VerticalContentAlignment="Center"
+                Margin="20,0,20,0" Height="35" Width="200"/>
 
-        <StackPanel Margin="20" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock               
+                VerticalAlignment="Center"
+                Text="员工编号" 
+                FontSize="12"/>
+
+            <TextBox 
+                FontSize="12"
+                MaxLines="1"
+                Name="tbForSearch"
+                VerticalContentAlignment="Center"
+                Margin="20,0,20,0" Height="35" Width="200"/>
+
+            <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                Margin="20,0,20,0"
+                Content="搜索" Click="SearchClick"/>
+
+            <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                Content="添加" Click="SearchClick"/>
+
+
+            <TextBlock
+                Margin="20,0,0,0"
+                VerticalAlignment="Center" 
+                Name="tblSearchMsg"
+                FontSize="12"/>
+
         </StackPanel>
 
         <StackPanel Margin="0" DockPanel.Dock="Bottom" Orientation="Horizontal"  Height="28" RenderTransformOrigin="0.5,0.5">
-            <Button  Content="上一页"  Margin="200,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="LastPage_Click" />
+            <Button  Content="上一页" Background="#FF6CABEE" Foreground="White" Margin="200,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="LastPage_Click" />
             <Label Content="第" Margin="10,0,0,0" VerticalAlignment="Center"/>
             <Label  Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" VerticalAlignment="Center" Name="current_num"/>
             <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
             <Label Content="共" Margin="5,0,0,0" VerticalAlignment="Center"/>
             <Label  Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" VerticalAlignment="Center" Name="total_num"/>
             <Label Content="页" Margin="5,0,0,0" VerticalAlignment="Center"/>
-            <Button  Content="下一页"  Margin="10,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="NextPage_Click" />
+            <Button  Content="下一页" Background="#FF6CABEE" Foreground="White" Margin="10,0,0,0" Padding="20,0,20,0" Width="Auto"  VerticalAlignment="Center" Click="NextPage_Click" />
             <Label Content="转到" Margin="30,0,0,0" VerticalAlignment="Center"/>
             <TextBox Margin="10,0,0,0" Width="40" HorizontalContentAlignment="Center"  VerticalAlignment="Center" Name="go_num"/>
             <Label Content="页" Margin="10,0,0,0" VerticalAlignment="Center"/>
-            <Button  Content="前往"  Margin="10,0,0,0" Padding="10,0,10,0" Width="50"  VerticalAlignment="Center" Click="Go_Click" />
+            <Button  Content="前往" Background="#FF6CABEE" Foreground="White" Margin="10,0,0,0" Padding="10,0,10,0" Width="50"  VerticalAlignment="Center" Click="Go_Click" />
         </StackPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="column1"/>
+            <Grid Grid.Column="1" x:Name="column2"/>
+            <Grid Grid.Column="2" x:Name="column3"/>
+            <Grid Grid.Column="3" x:Name="column4"/>
+        </Grid>
+        <ListView
+            Name="lvOrders" SelectionChanged="ordersItemClick">
+            <ListView.View>
+                <GridView ColumnHeaderTemplate="{StaticResource materialHeaderTemplate}" AllowsColumnReorder="True">
 
-        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Top"  Name="dg1" SelectedCellsChanged="Dg1_SelectedCellsChanged" Background="#FF19AA8D" BorderBrush="White"  >
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                <GradientStop Color="#FF19AA8D" Offset="1"/>
+                    <GridViewColumn Header="编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  
+                                    Width="{Binding ElementName=column1,Path=ActualWidth}"
+                                    TextAlignment="Center"
+                                    FontSize="12" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Text="{Binding out_id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-                            </LinearGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="FontSize" Value="13" />
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="LightBlue" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="LightGray"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="姓名" Binding="{Binding Path=user_name}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="工号" Binding="{Binding Path=emplyee_id}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="性别" Binding="{Binding Path=sex}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="年龄" Binding="{Binding Path=age}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="电话号码" Binding="{Binding Path=phone}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="是否离职" Binding="{Binding Path=state}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="员工类型" Binding="{Binding Path=type}" IsReadOnly="True"/>
-                <DataGridTemplateColumn Header="修改">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding Path=edit}" Click="Modify_Click">修改
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                    <GridViewColumn Header="时间"  Width="{Binding ElementName=column2,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding out_time}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-                <DataGridTemplateColumn Header="删除">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding Path=edit}" Click="Delete_Click">删除
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    <GridViewColumn  Header="员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding employee_id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="订单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
 
     </DockPanel>
 
