@@ -156,19 +156,38 @@ namespace MaterialMS
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)
-        {   
-            if(user == null)
+        {
+            dg1.SelectedItem = ((Button)sender).DataContext;
+            DataRowView rowSelected = dg1.SelectedItem as DataRowView;
+            if (rowSelected != null)
             {
-                getUserTable(1);
-                return;
-            }
-            UserModifyWindow umw = new UserModifyWindow(user,this);
-            umw.Show();
+                user = new User();
+                user.employee_id = rowSelected["employee_id"].ToString();
+                user.name = rowSelected["user_name"].ToString();
+                user.phone = rowSelected["phone"].ToString();
+                user.sex = rowSelected["sex"].ToString();
+                user.state = rowSelected["state"].ToString();
+                user.type = rowSelected["type"].ToString();
+                UserModifyWindow umw = new UserModifyWindow(user, this);
+                umw.Show();
+            }          
             getUserTable(1);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            dg1.SelectedItem = ((Button)sender).DataContext;
+            DataRowView rowSelected = dg1.SelectedItem as DataRowView;
+            if (rowSelected != null)
+            {
+                user = new User();
+                user.employee_id = rowSelected["employee_id"].ToString();
+                user.name = rowSelected["user_name"].ToString();
+                user.phone = rowSelected["phone"].ToString();
+                user.sex = rowSelected["sex"].ToString();
+                user.state = rowSelected["state"].ToString();
+                user.type = rowSelected["type"].ToString();
+            }
             if (user != null)
             {
                 if (user.type.Equals("11"))
@@ -276,16 +295,7 @@ namespace MaterialMS
         }
 
         private void Dg1_SelectedCellsChanged(object sender, SelectionChangedEventArgs e) {
-            DataRowView rowSelected = dg1.SelectedItem as DataRowView;
-            if (rowSelected != null) {
-                user = new User();                
-                user.employee_id = rowSelected["employee_id"].ToString();
-                user.name = rowSelected["user_name"].ToString();
-                user.phone = rowSelected["phone"].ToString();
-                user.sex = rowSelected["sex"].ToString();
-                user.state = rowSelected["state"].ToString();
-                user.type = rowSelected["type"].ToString();
-            }          
+            
         }
 
         //上一页
