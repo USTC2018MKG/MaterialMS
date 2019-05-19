@@ -24,7 +24,7 @@ namespace MaterialMS
     {
         UserManagePage userManagePage;
         MaterialManagePage materialManagePage;
-        DataAnalysisPage dataAnalysisPage;
+        ProductPage productPage;
         InFormPage inFormPage;
         OutFormPage outFormPage;
         public MainWindow()
@@ -71,12 +71,12 @@ namespace MaterialMS
             };
         }
 
-        private void dataAnalysisClick(object sender, RoutedEventArgs e)
+        private void productClick(object sender, RoutedEventArgs e)
         {
-            dataAnalysisPage = new DataAnalysisPage();
+            productPage = new ProductPage();
             ContentControl.Content = new Frame()
             {
-                Content = dataAnalysisPage
+                Content = productPage
             };
         }
 

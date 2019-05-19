@@ -13,6 +13,8 @@ namespace MaterialMS
         public String repository_id { get; set; }
         public String rest { get; set; }
         public String category_id { get; set; }
-        public String price { get; set; }
+        public String each_price { get; set; }
+        public String cycle { get; set; }
+        public String buy_type { get; set; }
     }
 }

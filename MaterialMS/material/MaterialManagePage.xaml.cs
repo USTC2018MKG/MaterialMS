@@ -35,14 +35,14 @@ namespace MaterialMS
         private void Search_Click(object sender, RoutedEventArgs e) {
             if (txtMname.Text.Trim() == "" && txtMid.Text.Trim() == "")
             {
-                labSearchMsg.Content = "请输入零件名或零件编号!";
+                tblSearchMsg.Text = "请输入零件名或零件编号!";
                 txtMname.Focus();
                 return;
             }
             //按照零件名查询
             else if (txtMid.Text.Trim() == "")
             {
-                labSearchMsg.Content = "";
+                tblSearchMsg.Text = "";
                 string sql = string.Format("select * from material where mname = '{0}' order by mname", txtMname.Text.Trim());
                 try
                 {
@@ -51,7 +51,7 @@ namespace MaterialMS
                     MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                     DataSet ds = new DataSet();
                     md.Fill(ds);
-                    dg2.ItemsSource = ds.Tables[0].AsDataView();
+                    lv.ItemsSource = ds.Tables[0].AsDataView();
                 }
                 catch (MySqlException ex)
                 {
@@ -72,7 +72,7 @@ namespace MaterialMS
                     MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                     DataSet ds = new DataSet();
                     md.Fill(ds);
-                    dg2.ItemsSource = ds.Tables[0].AsDataView();
+                    lv.ItemsSource = ds.Tables[0].AsDataView();
                 }
                 catch (MySqlException ex)
                 {
@@ -105,7 +105,7 @@ namespace MaterialMS
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
-                dg2.ItemsSource = ds.Tables[0].AsDataView();
+                lv.ItemsSource = ds.Tables[0].AsDataView();
             }
             catch (MySqlException ex)
             {
@@ -118,17 +118,46 @@ namespace MaterialMS
         }
 
         private void Dg2_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
-            DataRowView rowSelected = dg2.SelectedItem as DataRowView;
+            DataRowView rowSelected = lv.SelectedItem as DataRowView;
             if (rowSelected != null) {
                 material = new Material();               
                 material.mid = rowSelected["mid"].ToString();
                 material.mname = rowSelected["mname"].ToString();
                 material.repository_id = rowSelected["repository_id"].ToString();
                 material.rest = rowSelected["rest"].ToString();
-                material.price = rowSelected["price"].ToString();
+                material.cycle = rowSelected["cycle"].ToString();
+                material.each_price = rowSelected["each_price"].ToString();
+                material.buy_type = rowSelected["buy_type"].ToString();
             }
         }
 
+        private void ordersItemClick(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        //上一页
+        private void LastPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //下一页
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //跳转任意页
+        private void Go_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //sql分页工具类
+        public void Sqlutils(string sql_count)
+        {
+
+        }
 
     }
 }

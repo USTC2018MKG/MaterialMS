@@ -106,7 +106,7 @@ namespace MaterialMS.material
             txtRepository.Text = material.repository_id;
             txtRest.Text = material.rest;
             txtCategory.Text = material.category_id;
-            txtPrice.Text = material.price;
+            txtPrice.Text = material.each_price;
         }
     }
 }
