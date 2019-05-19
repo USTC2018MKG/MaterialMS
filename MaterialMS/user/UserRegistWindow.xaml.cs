@@ -39,14 +39,7 @@ namespace MaterialMS
                 labNameMsg.Content = "请输入员工姓名!";
                 txtName.Focus();
                 return;
-            }
-            else if (txtAge.Text.Trim() == "")
-            {
-                labAgeMsg.Content = "请输入员工年龄!";
-                txtAge.Focus();
-                return;
-            }
-            else if (txtPhone.Text.Trim() == "")
+            }else if (txtPhone.Text.Trim() == "")
             {
                 labPhoneMsg.Content = "请输入电话号码!";
                 txtPhone.Focus();
@@ -58,13 +51,32 @@ namespace MaterialMS
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 string uuid = System.Guid.NewGuid().ToString("N");
                 int sex;
+                int type = 0;
                 if (txtSex.IsChecked == true)
                 {
                     sex = 1;
                 }else {
                     sex = 0;
                 }
-                string sql = string.Format("insert into user (user_id,emplyee_id,user_name,user_pwd,sex,phone,state,age,type) values('{0}','{1}','{2}',123,'{3}','{4}',0,'{5}',2)", uuid,txtId.Text.Trim(),txtName.Text.Trim(),sex,txtPhone.Text.Trim(),txtAge.Text.Trim());
+
+                if (rdbStuff.IsChecked == true)
+                {
+                    type = 0;
+                }
+                else if (rdbEngineer.IsChecked == true)
+                {
+                    type = 1;
+                }
+                else if (rdbExecutive.IsChecked == true)
+                {
+                    type = 2;
+                }
+                else if (rdbManager.IsChecked == true)
+                {
+                    type = 3;
+                }
+
+                string sql = string.Format("insert into user (employee_id,user_name,user_pwd,sex,phone,state,type) values('{0}','{1}',123,'{2}','{3}',0,'{4}')", txtId.Text.Trim(),txtName.Text.Trim(),sex,txtPhone.Text.Trim(),type);
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -80,8 +92,7 @@ namespace MaterialMS
                     {
                         MessageBox.Show("插入失败!");
                         txtId.Text = "";
-                        txtName.Text = "";
-                        txtAge.Text = "";
+                        txtName.Text = "";                       
                         txtPhone.Text = "";
                     }
                 }
@@ -90,8 +101,7 @@ namespace MaterialMS
                     Console.WriteLine(ex.Message);
                     MessageBox.Show("插入失败!");
                     txtId.Text = "";
-                    txtName.Text = "";
-                    txtAge.Text = "";
+                    txtName.Text = "";                    
                     txtPhone.Text = "";
                 }
                 finally

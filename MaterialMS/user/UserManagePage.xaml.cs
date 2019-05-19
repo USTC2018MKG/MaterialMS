@@ -84,7 +84,7 @@ namespace MaterialMS
             //按照ID查询
             else
             {
-                string sql = string.Format("select * from user where emplyee_id = '{0}' order by user_name", txtId.Text.Trim());
+                string sql = string.Format("select * from user where employee_id = '{0}' order by user_name", txtId.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -105,12 +105,48 @@ namespace MaterialMS
             }
         }
 
-
-
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             UserRegistWindow urw = new UserRegistWindow(this);
             urw.Show();
+        }
+
+        //批量导入
+        private void BatchCreate_Click(object sender, RoutedEventArgs e)
+        {
+            string url = null;
+            // 在WPF中， OpenFileDialog位于Microsoft.Win32名称空间
+            Microsoft.Win32.OpenFileDialog dialog =
+                new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            if (dialog.ShowDialog() == true)
+            {
+                url = dialog.FileName;
+            }
+            string sql = "load data local infile \"" + url + "\" into table user fields terminated by '\t';";          
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                int result = cmd.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    MessageBox.Show("导入成功!");
+                }
+                else
+                {
+                    MessageBox.Show("导入失败!");
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("导入失败!");
+            }
+            finally
+            {
+                conn.Close();
+                getUserTable(1);
+            }
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)
@@ -124,12 +160,12 @@ namespace MaterialMS
         {
             if (user != null)
             {
-                if (user.type.Equals("0"))
+                if (user.type.Equals("10"))
                 {
                     MessageBox.Show("无删除超级管理员权限!");
                     return;
                 }
-                else if (user.type.Equals("1"))
+                else if (user.type.Equals("11"))
                 {
                     if (!Account.Instance.GetUser().type.Equals("0"))
                     {
@@ -139,7 +175,7 @@ namespace MaterialMS
                 }
                 string name = user.name;
                 string msg = "确定要删除用户" + name + "吗？";
-                string sql = string.Format("update user set state=1 where emplyee_id='{0}'", user.emplyee_id);
+                string sql = string.Format("update user set state=1 where employee_id='{0}'", user.employee_id);
                 
                 MessageBoxResult dr = MessageBox.Show(msg, "删除用户", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (dr == MessageBoxResult.OK)
@@ -161,7 +197,7 @@ namespace MaterialMS
                     catch (MySqlException ex)
                     {
                         Console.WriteLine(ex.Message);
-                        MessageBox.Show("插入失败!");
+                        MessageBox.Show("删除失败!");
                     }
                     finally
                     {
@@ -187,7 +223,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i order by user_name) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i order by user_name) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
@@ -217,7 +253,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;               
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,emplyee_id,user_name,sex,phone,state,age,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where k>'{0}' and k<='{1}'", begin, begin + limit, txtName.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where k>'{0}' and k<='{1}'", begin, begin + limit, txtName.Text.Trim());
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -236,15 +272,15 @@ namespace MaterialMS
             }
         }
 
-        private void Dg1_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+        private void Dg1_SelectedCellsChanged(object sender, SelectionChangedEventArgs e) {
             DataRowView rowSelected = dg1.SelectedItem as DataRowView;
             if (rowSelected != null) {
                 user = new User();                
-                user.emplyee_id = rowSelected["emplyee_id"].ToString();
+                user.employee_id = rowSelected["employee_id"].ToString();
                 user.name = rowSelected["user_name"].ToString();
                 user.phone = rowSelected["phone"].ToString();
                 user.sex = rowSelected["sex"].ToString();
-                user.age = rowSelected["age"].ToString();
+                user.state = rowSelected["state"].ToString();
                 user.type = rowSelected["type"].ToString();
             }
             

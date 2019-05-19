@@ -24,12 +24,13 @@
     </Page.Resources>
     <DockPanel >
         <Label DockPanel.Dock="Top" Content="用户管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
-
+        
         <StackPanel 
-            Height="80"
-            Orientation="Horizontal" 
+            Height="100"
+            Orientation="Vertical" 
             DockPanel.Dock="Top">
 
+            <StackPanel  Height="80" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
@@ -39,9 +40,9 @@
             <TextBox 
                 FontSize="12"
                 MaxLines="1"
-                
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="200"/>
+                Margin="20,0,20,0" Height="35" Width="150"
+                Name="txtName"/>
 
             <TextBlock               
                 VerticalAlignment="Center"
@@ -51,30 +52,37 @@
             <TextBox 
                 FontSize="12"
                 MaxLines="1"
-                Name="tbForSearch"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="200"/>
+                Margin="20,0,20,0" Height="35" Width="150"
+                Name="txtId"/>
 
             <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
                 HorizontalAlignment="Right"
-                Margin="20,0,20,0"
-                Content="搜索" Click="SearchClick"/>
+                VerticalAlignment="Center"
+                Margin="10,0,10,0"
+                Content="搜索" Click="Search_Click"/>
 
-            <Button 
+                <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
                 HorizontalAlignment="Right"
-                Content="添加" Click="SearchClick"/>
+                VerticalAlignment="Center"
+                Margin="10,0,20,0"
+                Content="添加" Click="Create_Click"/>
 
+                <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="批量导入" Click="BatchCreate_Click"/>
+            </StackPanel>
 
-            <TextBlock
-                Margin="20,0,0,0"
-                VerticalAlignment="Center" 
-                Name="tblSearchMsg"
-                FontSize="12"/>
-
+            <StackPanel Orientation="Horizontal" >
+                <Label Name="labSearchMsg"  Margin="600,0,0,0" Width="150"/>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Margin="0" DockPanel.Dock="Bottom" Orientation="Horizontal"  Height="28" RenderTransformOrigin="0.5,0.5">
@@ -97,50 +105,77 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" x:Name="column1"/>
             <Grid Grid.Column="1" x:Name="column2"/>
             <Grid Grid.Column="2" x:Name="column3"/>
             <Grid Grid.Column="3" x:Name="column4"/>
+            <Grid Grid.Column="4" x:Name="column5"/>
+            <Grid Grid.Column="5" x:Name="column6"/>
+            <Grid Grid.Column="6" x:Name="column7"/>
+            
         </Grid>
         <ListView
-            Name="lvOrders" SelectionChanged="ordersItemClick">
+            Name="dg1" SelectionChanged="Dg1_SelectedCellsChanged">
             <ListView.View>
                 <GridView ColumnHeaderTemplate="{StaticResource materialHeaderTemplate}" AllowsColumnReorder="True">
 
-                    <GridViewColumn Header="编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
+                    <GridViewColumn Header="员工编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock  
-                                    Width="{Binding ElementName=column1,Path=ActualWidth}"
-                                    TextAlignment="Center"
-                                    FontSize="12" HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Text="{Binding out_id}"/>
+                                <TextBlock Width="{Binding ElementName=column1,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding employee_id}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="时间"  Width="{Binding ElementName=column2,Path=ActualWidth}">
+                    <GridViewColumn Header="员工姓名"  Width="{Binding ElementName=column2,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding out_time}"/>
+                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding user_name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
+                    <GridViewColumn  Header="员工性别" Width="{Binding ElementName=column3,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding employee_id}"/>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding sex}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="订单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
+                    <GridViewColumn  Header="手机号码" Width="{Binding ElementName=column4,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
-                                    <Button  FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
+                                <TextBlock Width="{Binding ElementName=column4,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding phone}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="是否离职" Width="{Binding ElementName=column5,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding state}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="员工类型" Width="{Binding ElementName=column6,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding type}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="修      改" Width="{Binding ElementName=column6,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column6,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="修    改"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Modify_Click"/>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -149,7 +184,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
 
     </DockPanel>
 

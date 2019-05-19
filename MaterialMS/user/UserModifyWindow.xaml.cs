@@ -30,7 +30,8 @@ namespace MaterialMS
             this.user = user;
             this.up = up;
             InitWindow();
-            if (rdbTrue.IsChecked == true) {
+            string type = Account.Instance.GetUser().type;
+            if (type.Equals("10")) {
                 admin = true;
             }
             else
@@ -41,14 +42,7 @@ namespace MaterialMS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            if (txtAge.Text.Trim() == "")
-            {
-                labAgeMsg.Content = "请输入员工年龄!";
-                txtAge.Focus();
-                return;
-            }
-            else if (txtPhone.Text.Trim() == "")
+            if (txtPhone.Text.Trim() == "")
             {
                 labPhoneMsg.Content = "请输入电话号码!";
                 txtPhone.Focus();
@@ -59,60 +53,37 @@ namespace MaterialMS
                 //连接数据库对象
                 MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
                 int sex;
-                int type;
+                int type = 0;
+                if (admin == false) {
+                    MessageBox.Show("无修改员工权限!");
+                }
+
                 if (rdbMan.IsChecked == true)
                 {
                     sex = 1;
-                }
-                else
+                }else
                 {
                     sex = 0;
                 }
 
-                if (admin == true)
+                if (rdbStuff.IsChecked == true)
                 {
-                    if (rdbFalse.IsChecked == true)
-                    {
-                        if (!Account.Instance.GetUser().type.Equals("0"))
-                        {
-                            MessageBox.Show("无修改员工身份权限!");
-                            txtName.Text = "";
-                            txtAge.Text = "";
-                            txtPhone.Text = "";
-                            type = 1;
-                        }
-                        else
-                        {
-                            type = 2;
-                        }
-                    }
-                    else
-                    {
-                        type = 1;
-                    }
+                    type = 0;
                 }
-                else {
-                    if (rdbFalse.IsChecked == true)
-                    {
-                        type = 2;
-                    }
-                    else
-                    {
-                        if (!Account.Instance.GetUser().type.Equals("0"))
-                        {
-                            MessageBox.Show("无修改员工身份权限!");
-                            txtName.Text = "";
-                            txtAge.Text = "";
-                            txtPhone.Text = "";
-                            type = 2;
-                        }
-                        else
-                        {
-                            type = 1;
-                        }
-                    }
+                else if (rdbEngineer.IsChecked == true)
+                {
+                    type = 1;
                 }
-                string sql = string.Format("update user set user_name='{0}',sex='{1}',phone='{2}',age='{3}',type='{4}' where emplyee_id='{5}'", txtName.Text.Trim(), sex, txtPhone.Text.Trim(), txtAge.Text.Trim(),type, user.emplyee_id);
+                else if (rdbExecutive.IsChecked == true)
+                {
+                    type = 2;
+                }
+                else if (rdbManager.IsChecked == true)
+                {
+                    type = 3;
+                }
+
+                string sql = string.Format("update user set user_name='{0}',sex='{1}',phone='{2}',type='{3}' where employee_id='{4}'", txtName.Text.Trim(), sex, txtPhone.Text.Trim(), type, user.employee_id);
                 try
                 {
                     conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
@@ -129,7 +100,6 @@ namespace MaterialMS
                         MessageBox.Show("插入失败!");
 
                         txtName.Text = "";
-                        txtAge.Text = "";
                         txtPhone.Text = "";
                     }
                 }
@@ -137,9 +107,7 @@ namespace MaterialMS
                 {
                     Console.WriteLine(ex.Message);
                     MessageBox.Show("插入失败!");
-
-                    txtName.Text = "";
-                    txtAge.Text = "";
+                    txtName.Text = "";                    
                     txtPhone.Text = "";
                 }
                 finally
@@ -151,24 +119,28 @@ namespace MaterialMS
 
         private void InitWindow()
         {
-            txtName.Text = user.name;
-            txtAge.Text = user.age;
+            txtName.Text = user.name;          
             txtPhone.Text = user.phone;
             if (user.sex.Equals("1"))
             {
                 rdbMan.IsChecked = true;
-            }
-            else
+            }else
             {
                 rdbWoman.IsChecked = true;
             }
-            if(user.type.Equals("0") || user.type.Equals("1"))
+
+            if(user.type.Equals("0"))
             {
-                rdbTrue.IsChecked = true;
-            }
-            else if (user.type.Equals("2"))
+                rdbStuff.IsChecked = true;
+            }else if (user.type.Equals("1"))
             {
-                rdbFalse.IsChecked = true;
+                rdbEngineer.IsChecked = true;
+            }else if (user.type.Equals("2"))
+            {
+                rdbExecutive.IsChecked = true;
+            }else if (user.type.Equals("3"))
+            {
+                rdbManager.IsChecked = true;
             }
         }
     }

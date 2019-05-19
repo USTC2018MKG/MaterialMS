@@ -9,12 +9,11 @@ namespace MaterialMS
     public class User
     {
         public String user_id { get; set; }
-        public String emplyee_id { get; set; }
+        public String employee_id { get; set; }
         public String name { get; set; }
         public String password { get; set; }
         public String sex { get; set; }
         public String phone { get; set; }
-        public String age { get; set; }
         public String type { get; set; }
         public String state { get; set; }
     }

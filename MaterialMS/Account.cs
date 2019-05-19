@@ -61,7 +61,7 @@ namespace MaterialMS
         // 判断当前的登录状态
         public bool IsLogin()
         {
-            return mUser != null && !string.IsNullOrEmpty(mUser.emplyee_id)
+            return mUser != null && !string.IsNullOrEmpty(mUser.employee_id)
                                  && !string.IsNullOrEmpty(mUser.password);
         }
     }

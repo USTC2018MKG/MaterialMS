@@ -56,7 +56,7 @@ namespace MaterialMS
             try
             {
                 MySqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = "select * from user where emplyee_id=@username";
+                cmd.CommandText = "select * from user where employee_id=@username";
                 cmd.Parameters.Add(new MySqlParameter("@username", MySqlDbType.VarChar, 50));
                 cmd.Parameters["@username"].Value = txtUserName.Text;
                 MySqlDataReader sdr = cmd.ExecuteReader();
@@ -70,7 +70,8 @@ namespace MaterialMS
                 
                 else if (sdr["user_pwd"].ToString().Trim() == txtPwd.Password.Trim())
                 {
-                    if (sdr["type"].ToString().Trim().Equals("2"))
+                    String in_type = sdr["type"].ToString().Trim();
+                    if (in_type.Equals("0") || in_type.Equals("1") || in_type.Equals("2") || in_type.Equals("3"))
                     {
                         labNameMsg.Content = "普通用户无访问权限！";
                         txtUserName.Text = "";
@@ -80,13 +81,12 @@ namespace MaterialMS
                     else
                     {
                         User user = new User();
-                        user.emplyee_id = sdr["emplyee_id"].ToString().Trim();
+                        user.employee_id = sdr["employee_id"].ToString().Trim();
                         user.name = sdr["user_name"].ToString().Trim();
                         user.password = sdr["user_pwd"].ToString().Trim();
                         user.sex = sdr["sex"].ToString().Trim();
                         user.phone = sdr["phone"].ToString().Trim();
                         user.state = sdr["state"].ToString().Trim();
-                        user.age = sdr["age"].ToString().Trim();
                         user.type = sdr["type"].ToString().Trim();
 
                         Account.Instance.Login(user);
@@ -94,8 +94,6 @@ namespace MaterialMS
                         this.Close();
                         Mn.Show();
                     }
-
-
                 }
                 else
                 {
