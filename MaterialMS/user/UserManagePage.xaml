@@ -108,6 +108,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" x:Name="column1"/>
             <Grid Grid.Column="1" x:Name="column2"/>
@@ -116,10 +117,10 @@
             <Grid Grid.Column="4" x:Name="column5"/>
             <Grid Grid.Column="5" x:Name="column6"/>
             <Grid Grid.Column="6" x:Name="column7"/>
-            
+            <Grid Grid.Column="7" x:Name="column8"/>
         </Grid>
         <ListView
-            Name="dg1" SelectionChanged="Dg1_SelectedCellsChanged">
+            Name="dg1" SelectionChanged="Dg1_SelectedCellsChanged" >
             <ListView.View>
                 <GridView ColumnHeaderTemplate="{StaticResource materialHeaderTemplate}" AllowsColumnReorder="True">
 
@@ -158,7 +159,7 @@
                     <GridViewColumn  Header="是否离职" Width="{Binding ElementName=column5,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding state}"/>
+                                <TextBlock Width="{Binding ElementName=column5,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding state}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -166,16 +167,26 @@
                     <GridViewColumn  Header="员工类型" Width="{Binding ElementName=column6,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding type}"/>
+                                <TextBlock Width="{Binding ElementName=column6,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding type}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="修      改" Width="{Binding ElementName=column6,Path=ActualWidth}">
+                    <GridViewColumn  Header="修      改" Width="{Binding ElementName=column7,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid Width="{Binding ElementName=column6,Path=ActualWidth}">
+                                <Grid Width="{Binding ElementName=column7,Path=ActualWidth}">
                                     <Button  FontSize="12" Content="修    改"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Modify_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="删      除" Width="{Binding ElementName=column8,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column8,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="删    除"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Delete_Click"/>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

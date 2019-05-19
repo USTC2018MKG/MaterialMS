@@ -114,43 +114,54 @@ namespace MaterialMS
         //批量导入
         private void BatchCreate_Click(object sender, RoutedEventArgs e)
         {
-            string url = null;
+            string url = "";
             // 在WPF中， OpenFileDialog位于Microsoft.Win32名称空间
-            Microsoft.Win32.OpenFileDialog dialog =
-                new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();            
             dialog.Filter = "文本文件|*.txt";
-            if (dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)           
             {
-                url = dialog.FileName;
-            }
-            string sql = "load data local infile \"" + url + "\" into table user fields terminated by '\t';";          
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                int result = cmd.ExecuteNonQuery();
-                if (result != 0)
+                url = dialog.FileName.Replace("\\", "/");               
+                Console.WriteLine(url);
+                string sql = "load data local infile \"" + url + "\" into table user fields terminated by '\t';";
+                Console.WriteLine(sql);                
+                try
                 {
-                    MessageBox.Show("导入成功!");
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    int result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                    {
+                        MessageBox.Show("导入成功!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("导入失败!");
+                    }
                 }
-                else
+                catch (MySqlException ex)
                 {
+                    Console.WriteLine(ex.Message);
                     MessageBox.Show("导入失败!");
                 }
+                finally
+                {
+                    conn.Close();
+                    getUserTable(1);
+                }                
             }
-            catch (MySqlException ex)
+            else
             {
-                MessageBox.Show("导入失败!");
-            }
-            finally
-            {
-                conn.Close();
                 getUserTable(1);
-            }
+            }           
         }
 
         private void Modify_Click(object sender, RoutedEventArgs e)
-        {           
+        {   
+            if(user == null)
+            {
+                getUserTable(1);
+                return;
+            }
             UserModifyWindow umw = new UserModifyWindow(user,this);
             umw.Show();
             getUserTable(1);
@@ -160,18 +171,10 @@ namespace MaterialMS
         {
             if (user != null)
             {
-                if (user.type.Equals("10"))
+                if (user.type.Equals("11"))
                 {
-                    MessageBox.Show("无删除超级管理员权限!");
+                    MessageBox.Show("无删除权限!");
                     return;
-                }
-                else if (user.type.Equals("11"))
-                {
-                    if (!Account.Instance.GetUser().type.Equals("0"))
-                    {
-                        MessageBox.Show("无删除管理员权限!");
-                        return;
-                    }
                 }
                 string name = user.name;
                 string msg = "确定要删除用户" + name + "吗？";
@@ -208,7 +211,7 @@ namespace MaterialMS
             }
             else
             {
-                MessageBox.Show("请点击要删除的用户行!");
+                MessageBox.Show("请点击要选中的用户行!");
             }
         }
 
@@ -282,8 +285,7 @@ namespace MaterialMS
                 user.sex = rowSelected["sex"].ToString();
                 user.state = rowSelected["state"].ToString();
                 user.type = rowSelected["type"].ToString();
-            }
-            
+            }          
         }
 
         //上一页

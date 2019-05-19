@@ -119,29 +119,33 @@ namespace MaterialMS
 
         private void InitWindow()
         {
-            txtName.Text = user.name;          
+            txtName.Text = user.name;
             txtPhone.Text = user.phone;
             if (user.sex.Equals("1"))
             {
                 rdbMan.IsChecked = true;
-            }else
+            }
+            else
             {
                 rdbWoman.IsChecked = true;
             }
 
-            if(user.type.Equals("0"))
+            if (user.type.Equals("0"))
             {
                 rdbStuff.IsChecked = true;
-            }else if (user.type.Equals("1"))
+            }
+            else if (user.type.Equals("1"))
             {
                 rdbEngineer.IsChecked = true;
-            }else if (user.type.Equals("2"))
+            }
+            else if (user.type.Equals("2"))
             {
                 rdbExecutive.IsChecked = true;
-            }else if (user.type.Equals("3"))
+            }
+            else if (user.type.Equals("3"))
             {
                 rdbManager.IsChecked = true;
-            }
+            }    
         }
     }
 }
