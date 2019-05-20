@@ -108,6 +108,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" x:Name="column0"/>
             <Grid Grid.Column="1" x:Name="column1"/>
@@ -116,6 +117,7 @@
             <Grid Grid.Column="4" x:Name="column4"/>
             <Grid Grid.Column="5" x:Name="column5"/>
             <Grid Grid.Column="6" x:Name="column6"/>
+            <Grid Grid.Column="7" x:Name="column7"/>
         </Grid>
         <ListView
             Name="lv" SelectionChanged="ordersItemClick">
@@ -202,7 +204,17 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
+                    <GridViewColumn  Header="修      改" Width="{Binding ElementName=column7,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column7,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="修    改"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Modify_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>

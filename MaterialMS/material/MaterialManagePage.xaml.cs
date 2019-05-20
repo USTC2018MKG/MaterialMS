@@ -121,13 +121,54 @@ namespace MaterialMS
                 getMaterialTable(1);
             }
         }
-        
+
 
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
-            MaterialModifyWindow mmw = new MaterialModifyWindow(material,this);
-            mmw.Show();
-            getMaterialTable(1);
+            lv.SelectedItem = ((Button)sender).DataContext;
+            DataRowView rowSelected = lv.SelectedItem as DataRowView;
+            if (rowSelected != null)
+            {
+                material = new Material();
+                material.mid = rowSelected["mid"].ToString();
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = "select * from material where mid=@mid";
+                    cmd.Parameters.Add(new MySqlParameter("@mid", MySqlDbType.VarChar, 50));
+                    cmd.Parameters["@mid"].Value = material.mid;
+                    MySqlDataReader sdr = cmd.ExecuteReader();
+                    sdr.Read();
+
+                    material.mname = sdr["mname"].ToString().Trim();
+                    material.cycle = sdr["cycle"].ToString().Trim(); 
+                    material.buy_type = sdr["buy_type"].ToString().Trim(); 
+                    material.shopping_car = sdr["shopping_car"].ToString().Trim(); 
+                    material.first_repo = sdr["first_repo"].ToString().Trim(); 
+                    material.repository_id = sdr["repository_id"].ToString().Trim(); 
+                    material.ntax_price = sdr["ntax_price"].ToString().Trim(); 
+                    material.knife_num = sdr["knife_num"].ToString().Trim(); 
+                    material.rotate_num = sdr["rotate_num"].ToString().Trim(); 
+                    material.pred_age = sdr["pred_age"].ToString().Trim(); 
+                    material.exchange = sdr["exchange"].ToString().Trim(); 
+                    material.get_max = sdr["get_max"].ToString().Trim(); 
+                    material.each_price = sdr["each_price"].ToString().Trim(); 
+                    material.rest = sdr["rest"].ToString().Trim(); 
+                    MaterialModifyWindow mmw = new MaterialModifyWindow(material, this);
+                    mmw.Show();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("修改失败!");
+                }
+                finally
+                {
+                    conn.Close();
+                    getMaterialTable(1);
+                }         
+            }
+            
         }
 
         public void getMaterialTable(int page){
@@ -173,7 +214,6 @@ namespace MaterialMS
             }
         }
 
-
         public void searchByName(int page)
         {
             try
@@ -210,7 +250,7 @@ namespace MaterialMS
 
         }
         */
-        //上一页
+            //上一页
         private void LastPage_Click(object sender, RoutedEventArgs e)
         {
             int currentpage = (int)current_num.Content;
