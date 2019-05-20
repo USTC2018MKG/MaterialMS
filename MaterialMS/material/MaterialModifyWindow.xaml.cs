@@ -71,7 +71,7 @@ namespace MaterialMS.material
                     if (result != 0)
                     {
                         MessageBox.Show("插入成功!");
-                        mp.getMaterialTable();
+                        mp.getMaterialTable(1);
                     }
                     else
                     {
@@ -104,8 +104,7 @@ namespace MaterialMS.material
         {
             txtMname.Text = material.mname;
             txtRepository.Text = material.repository_id;
-            txtRest.Text = material.rest;
-            txtCategory.Text = material.category_id;
+            txtRest.Text = material.rest;       
             txtPrice.Text = material.each_price;
         }
     }

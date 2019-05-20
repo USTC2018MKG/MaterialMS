@@ -41,7 +41,7 @@
                 MaxLines="1"
                 Name="txtMname"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="200"/>
+                Margin="20,0,20,0" Height="35" Width="150"/>
             
             <TextBlock               
                 VerticalAlignment="Center"
@@ -53,20 +53,28 @@
                 MaxLines="1"
                 Name="txtMid"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="200"/>
+                Margin="20,0,20,0" Height="35" Width="150"/>
 
             <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
                 HorizontalAlignment="Right"
-                Margin="20,0,20,0"
+                Margin="20,0,10,0"
                 Content="搜索" Click="Search_Click"/>
 
             <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
                 HorizontalAlignment="Right"
+                Margin="10,0,10,0"
                 Content="添加" Click="Create_Click"/>
+
+            <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                Margin="10,0,10,0"
+                Content="批量导入" Click="BatchCreate_Click"/>
 
 
             <TextBlock

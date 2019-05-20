@@ -10,11 +10,18 @@ namespace MaterialMS
     {
         public String mid{ get; set; }
         public String mname { get; set; }
-        public String repository_id { get; set; }
-        public String rest { get; set; }
-        public String category_id { get; set; }
-        public String each_price { get; set; }
         public String cycle { get; set; }
         public String buy_type { get; set; }
+        public String shopping_car{ get; set; }
+        public String first_repo { get; set; }
+        public String repository_id { get; set; }
+        public String ntax_price { get; set; }
+        public String knife_num { get; set; }
+        public String rotate_num { get; set; }
+        public String pred_age { get; set; }
+        public String exchange { get; set; }
+        public String get_max { get; set; }
+        public String each_price { get; set; }
+        public String rest { get; set; }               
     }
 }
