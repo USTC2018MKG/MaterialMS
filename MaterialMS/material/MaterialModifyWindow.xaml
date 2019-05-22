@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS.material"
         mc:Ignorable="d"
-        Title="物料修改" Height="450" Width="800">
+        Title="刀具修改" Height="450" Width="800">
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="1" >
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">

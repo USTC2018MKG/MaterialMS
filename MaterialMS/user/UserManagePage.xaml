@@ -135,7 +135,7 @@
                     <GridViewColumn Header="员工姓名"  Width="{Binding ElementName=column2,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding user_name}"/>
+                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -143,7 +143,7 @@
                     <GridViewColumn  Header="员工性别" Width="{Binding ElementName=column3,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding sex}"/>
+                                <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding sexString}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -159,7 +159,7 @@
                     <GridViewColumn  Header="是否离职" Width="{Binding ElementName=column5,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column5,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding state}"/>
+                                <TextBlock Width="{Binding ElementName=column5,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding stateString}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -167,7 +167,7 @@
                     <GridViewColumn  Header="员工类型" Width="{Binding ElementName=column6,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column6,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding type}"/>
+                                <TextBlock Width="{Binding ElementName=column6,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding typeString}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="刀具管理系统" Height="600" Width="1000">
     <Grid Background="#FFFFFF" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>

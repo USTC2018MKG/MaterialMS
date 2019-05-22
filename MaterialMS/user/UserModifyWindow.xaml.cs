@@ -92,12 +92,12 @@ namespace MaterialMS
                     int result = cmd.ExecuteNonQuery();
                     if (result != 0)
                     {
-                        MessageBox.Show("插入成功!");
+                        MessageBox.Show("修改成功!");
                         up.getUserTable(1);
                     }
                     else
                     {
-                        MessageBox.Show("插入失败!");
+                        MessageBox.Show("修改失败!");
 
                         txtName.Text = "";
                         txtPhone.Text = "";
@@ -106,7 +106,7 @@ namespace MaterialMS
                 catch (MySqlException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    MessageBox.Show("插入失败!");
+                    MessageBox.Show("修改失败!");
                     txtName.Text = "";                    
                     txtPhone.Text = "";
                 }
