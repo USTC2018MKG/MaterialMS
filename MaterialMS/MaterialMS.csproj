@@ -80,6 +80,9 @@
     </ApplicationDefinition>
     <Compile Include="Account.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="product\AddMaterialInfoWindow.xaml.cs">
+      <DependentUpon>AddMaterialInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="product\AddProductWindow.xaml.cs">
       <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,7 @@
     <Compile Include="product\ProductDetailWindow.xaml.cs">
       <DependentUpon>ProductDetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="product\ProductItem.cs" />
     <Compile Include="product\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +131,10 @@
     <Compile Include="user\UserRegistWindow.xaml.cs">
       <DependentUpon>UserRegistWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="product\AddMaterialInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="product\AddProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

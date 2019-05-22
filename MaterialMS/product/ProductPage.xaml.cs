@@ -184,7 +184,16 @@ namespace MaterialMS
             }
         }
 
-        private void Detail_Click(object sender, RoutedEventArgs e) { }
+        private void Detail_Click(object sender, RoutedEventArgs e) {
+            lvProduct.SelectedItem = ((Button)sender).DataContext;
+            DataRowView rowSelected = lvProduct.SelectedItem as DataRowView;
+            if (rowSelected != null) {
+                Product product = new Product();
+                product.pid = rowSelected["pid"].ToString();
+                ProductDetailWindow detailWindow = new ProductDetailWindow(product);
+                detailWindow.Show();
+            }
+        }
        
 
         private void ordersItemClick(object sender, SelectionChangedEventArgs e)
