@@ -80,6 +80,9 @@
     </ApplicationDefinition>
     <Compile Include="Account.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="knife_in\KnifeInPage.xaml.cs">
+      <DependentUpon>KnifeInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="product\AddMaterialInfoWindow.xaml.cs">
       <DependentUpon>AddMaterialInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
     <Compile Include="user\UserRegistWindow.xaml.cs">
       <DependentUpon>UserRegistWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="knife_in\KnifeInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="product\AddMaterialInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

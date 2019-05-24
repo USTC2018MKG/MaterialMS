@@ -1,4 +1,5 @@
 ﻿using MaterialMS.input;
+using MaterialMS.knife_in;
 using MaterialMS.output;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace MaterialMS
         ProductPage productPage;
         InFormPage inFormPage;
         OutFormPage outFormPage;
+        KnifeInPage knifeInPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +52,15 @@ namespace MaterialMS
             ContentControl.Content = new Frame()
             {
                 Content = materialManagePage
+            };
+        }
+
+        private void knifeInClick(object sender, RoutedEventArgs e)
+        {
+            knifeInPage = new KnifeInPage();
+            ContentControl.Content = new Frame()
+            {
+                Content = knifeInPage
             };
         }
 

@@ -1,0 +1,203 @@
+﻿<Page x:Class="MaterialMS.knife_in.KnifeInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MaterialMS.knife_in"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="KnifeInPage">
+
+    <Page.Resources>
+        <DataTemplate x:Key="materialHeaderTemplate">
+            <TextBlock 
+                Padding="3" 
+                FontSize="12" 
+                Width="80"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" TextAlignment="Center">
+                <TextBlock.Text>
+                    <Binding/>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+    </Page.Resources>
+
+    <DockPanel>
+        <Label DockPanel.Dock="Top" Content="刀具入库" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
+        <StackPanel 
+            Height="80"
+            Orientation="Horizontal" 
+            DockPanel.Dock="Top">
+            
+            <TextBlock               
+                VerticalAlignment="Center"
+                Text="  刀具编号" 
+                FontSize="12"/>
+
+            <TextBox 
+                FontSize="12"
+                MaxLines="1"
+                Name="txtMid"
+                VerticalContentAlignment="Center"
+                Margin="20,0,20,0" Height="35" Width="150"/>
+
+            <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                Margin="20,0,10,0"
+                Content="搜索" Click="Search_Click"/>
+
+            <Button 
+                Style="{StaticResource commonButton}"
+                FontSize="12"
+                HorizontalAlignment="Right"
+                Margin="10,0,10,0"
+                Content="入库清单" Click="InList_Click"/>
+
+            <Label
+                Margin="20,0,0,0"
+                VerticalAlignment="Center" 
+                Name="tblSearchMsg"
+                Width="150"
+                Height="26"
+                FontSize="12"/>
+
+        </StackPanel>
+
+        
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="column0"/>
+            <Grid Grid.Column="1" x:Name="column1"/>
+            <Grid Grid.Column="2" x:Name="column2"/>
+            <Grid Grid.Column="3" x:Name="column3"/>
+            <Grid Grid.Column="4" x:Name="column4"/>
+            <Grid Grid.Column="5" x:Name="column5"/>
+            <Grid Grid.Column="6" x:Name="column6"/>
+            <Grid Grid.Column="7" x:Name="column7"/>
+            <Grid Grid.Column="8" x:Name="column8"/>
+        </Grid>
+        <ListView
+            Name="knife" SelectionChanged="knifesItemClick">
+            <ListView.View>
+                <GridView  AllowsColumnReorder="True">
+
+                    <GridViewColumn Header="刀具编号" Width="{Binding ElementName=column0,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  
+                                    Width="{Binding ElementName=column0,Path=ActualWidth}"
+                                    TextAlignment="Center"
+                                    FontSize="12" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Text="{Binding mid}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="刀具名称"  Width="{Binding ElementName=column1,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column1,Path=ActualWidth}" 
+                                           FontSize="12" 
+                                           TextAlignment="Center" 
+                                           HorizontalAlignment="Center"  
+                                           VerticalAlignment="Center" Text="{Binding mname}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="交货周期" Width="{Binding ElementName=column2,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" 
+                                           FontSize="12"  VerticalAlignment="Center" 
+                                           HorizontalAlignment="Center" TextAlignment="Center" 
+                                           Text="{Binding cycle}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="购买型号" Width="{Binding ElementName=column3,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column3,Path=ActualWidth}">
+                                    <TextBlock  FontSize="12" VerticalAlignment="Center" TextAlignment="Center"  HorizontalAlignment="Center" Text="{Binding buy_type}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="刀具库位" Width="{Binding ElementName=column4,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
+                                    <TextBlock  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding repository_id}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="可用数量" Width="{Binding ElementName=column5,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column5,Path=ActualWidth}">
+                                    <TextBlock  FontSize="12" VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Text="{Binding rest}"
+                                                />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="单价成本" Width="{Binding ElementName=column6,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column6,Path=ActualWidth}">
+                                    <TextBlock  FontSize="12" VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Text="{Binding each_price}"
+                                                />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="入库数量" Width="{Binding ElementName=column7,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column7,Path=ActualWidth}">
+                                    <TextBox Name="txtAddnum"  Width="50" VerticalContentAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="添      加" Width="{Binding ElementName=column8,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column8,Path=ActualWidth}">
+                                    <Button  FontSize="12" Content="添加清单"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Add_Click" Tag="{Binding ElementName = txtAddnum, Path=Text}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </DockPanel>
+</Page>

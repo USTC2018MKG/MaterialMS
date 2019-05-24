@@ -32,17 +32,20 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Name="btnUserPage" Grid.Row="0" Grid.Column="0" Foreground="White" Background="#FF6CABEE" BorderBrush="White" FontSize="16" Click="userPageClick">用户管理
             </Button>
             <Button Name="btnMatePage" Grid.Row="1" Grid.Column="0" Background="#FF6CABEE" BorderBrush="White" Foreground="White" FontSize="16" Click="materialClick">刀具管理
             </Button>
-            <Button Name="btnInPage"  Grid.Row="2" Grid.Column="0" BorderBrush="White" Foreground="White" Background="#FF5BA4F1" FontSize="16" Click="inputPageClick">入库管理
+            <Button Name="btnKnifePage" Grid.Row="2" Grid.Column="0" Background="#FF6CABEE" BorderBrush="White" Foreground="White" FontSize="16" Click="knifeInClick">刀具入库
             </Button>
-            <Button Name="btnOutPage" Grid.Row="3" Grid.Column="0" BorderBrush="White" Foreground="White" Background="#FF5BA4F1" FontSize="16" Click="outputPageClick">出库管理
+            <Button Name="btnInPage"  Grid.Row="3" Grid.Column="0" BorderBrush="White" Foreground="White" Background="#FF5BA4F1" FontSize="16" Click="inputPageClick">入库管理
             </Button>
-            <Button Name="btnDataPage" Grid.Row="4" Grid.Column="0" Background="#FF6CABEE" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="16" Click="productClick">产品管理
+            <Button Name="btnOutPage" Grid.Row="4" Grid.Column="0" BorderBrush="White" Foreground="White" Background="#FF5BA4F1" FontSize="16" Click="outputPageClick">出库管理
+            </Button>
+            <Button Name="btnDataPage" Grid.Row="5" Grid.Column="0" Background="#FF6CABEE" Foreground="White" BorderBrush="#FFFFFDFD" FontSize="16" Click="productClick">产品管理
             </Button>
         </Grid>
         <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Background="#FF286294" Name="ContentControl" FontFamily="Modern No. 20">

@@ -22,6 +22,7 @@ namespace MaterialMS
         public String exchange { get; set; }
         public String get_max { get; set; }
         public String each_price { get; set; }
-        public String rest { get; set; }               
+        public String rest { get; set; } 
+        public String add_num { get; set; }
     }
 }

@@ -244,13 +244,8 @@ namespace MaterialMS
                 conn.Close();
             }
         }
-        /*
-        private void ordersItemClick(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        */
-            //上一页
+       
+        //上一页
         private void LastPage_Click(object sender, RoutedEventArgs e)
         {
             int currentpage = (int)current_num.Content;
