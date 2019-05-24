@@ -90,7 +90,7 @@
             <Grid Grid.Column="8" x:Name="column8"/>
         </Grid>
         <ListView
-            Name="knife" SelectionChanged="knifesItemClick">
+            Name="knife" SelectionChanged="knifesItemClick" >
             <ListView.View>
                 <GridView  AllowsColumnReorder="True">
 
@@ -179,7 +179,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid Width="{Binding ElementName=column7,Path=ActualWidth}">
-                                    <TextBox Name="txtAddnum"  Width="50" VerticalContentAlignment="Center" />
+                                    <TextBox Name="txtAddnum"  Width="50" VerticalContentAlignment="Center" Text="{Binding add_num}"/>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

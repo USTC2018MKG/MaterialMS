@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace MaterialMS.knife_in
         private MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
         private Material material;
         private List<Material> materials;
+        private ObservableCollection<Material> os;
 
         public KnifeInPage()
         {
@@ -43,14 +45,34 @@ namespace MaterialMS.knife_in
             //按照ID查询
             else
             {
-                string sql = string.Format("select * from material where mid = '{0}' order by mname", txtMid.Text.Trim());
+                MySqlConnection connection = new MySqlConnection(Constant.myConnectionString);
+                connection.Open();
+         
                 try
                 {
-                    conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
-                    MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
-                    DataSet ds = new DataSet();
-                    md.Fill(ds);
-                    knife.ItemsSource = ds.Tables[0].AsDataView();
+                    MySqlCommand cmd = connection.CreateCommand();
+                    cmd.CommandText = "select * from material where mid=@mid";
+                    cmd.Parameters.Add(new MySqlParameter("@mid", MySqlDbType.VarChar, 50));
+                    cmd.Parameters["@mid"].Value = txtMid.Text;
+                    MySqlDataReader sdr = cmd.ExecuteReader();
+                    Console.WriteLine(sdr);
+                    if (sdr.Read()) {
+                        os = new ObservableCollection<Material>() {
+                          new Material(){
+                              mid=sdr["mid"].ToString(),
+                              rest=sdr["rest"].ToString(),
+                              mname=sdr["mname"].ToString(),
+                              add_num="",
+                              buy_type=sdr["buy_type"].ToString(),
+                              cycle = sdr["cycle"].ToString(),
+                              each_price = sdr["each_price"].ToString(),
+                              repository_id = sdr["repository_id"].ToString()
+                          }
+
+                        };
+                        Console.WriteLine(sdr["mname"].ToString());
+                    }
+                    knife.ItemsSource = os;
                 }
                 catch (MySqlException ex)
                 {
@@ -74,12 +96,12 @@ namespace MaterialMS.knife_in
             if (rowSelected != null)
             {  
                 material.rest = rowSelected["rest"].ToString();
-                material.mid = rowSelected["mid"].ToString();
+                material.mid = rowSelected["mid"].ToString();               
                 String tbText = btn.Tag as String;
                 material.add_num = tbText;
             }
             string addnum = material.add_num;
-            string msg = "确定要入库刀具" + material.mid + ":" + addnum + "只吗?";
+            string msg = "确定要入库刀具" + material.mid + ":" + os[0].add_num + "只吗?";
             MessageBoxResult dr = MessageBox.Show(msg, "刀具入库", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (dr == MessageBoxResult.OK)
             {
@@ -102,7 +124,7 @@ namespace MaterialMS.knife_in
         {
             //Console.Write(sender);
         }
-
+        
 
     }
 }
