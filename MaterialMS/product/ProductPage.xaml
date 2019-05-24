@@ -29,7 +29,7 @@
             Height="100"
             Orientation="Vertical" 
             DockPanel.Dock="Top">
-            <StackPanel  Height="80" Orientation="Horizontal" VerticalAlignment="Center">
+            <StackPanel  Height="100" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
@@ -71,17 +71,17 @@
                 Margin="10,0,20,0"
                 Content="添加" Click="Create_Click"/>
 
-                <Button 
+                <!--<Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Content="批量导入" Click="BatchCreate_Click"/>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" >
+                Content="批量导入" Click="BatchCreate_Click"/>-->
                 <Label Name="labSearchMsg"  Margin="600,0,0,0" Width="150"/>
             </StackPanel>
+            <!--<StackPanel Orientation="Horizontal" >
+                <Label Name="labSearchMsg"  Margin="600,0,0,0" Width="150"/>
+            </StackPanel>-->
 
         </StackPanel>
 
