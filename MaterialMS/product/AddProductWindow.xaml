@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AddProductWindow" Height="600" Width="800">
+        Title="产品添加" Height="600" Width="800">
     <Grid>
         <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Background="#FFEAE8E8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="717*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Column="2" Margin="84.2,0,160.6,0.4" >
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
                     <Label HorizontalAlignment="Center" Content="产品编号" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
@@ -32,7 +37,7 @@
                     <TextBox HorizontalAlignment="Center" Height="26" Margin="20,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Name="txtTool"/>
                     <Label  HorizontalAlignment="Center" Height="26" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" Name="labToolMsg"/>
                 </StackPanel>
-                
+
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
                     <Label Content="选择刀具" HorizontalAlignment="Center" Margin="80,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.519" Width="60" />
                     <TextBox HorizontalAlignment="Center" Margin="20,0,0,0" Height="26" VerticalAlignment="Top" Width="150" Name="txtKnife"/>

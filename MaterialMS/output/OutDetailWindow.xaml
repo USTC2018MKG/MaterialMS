@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialMS.output"
         mc:Ignorable="d"
-        Title="订单详情" Height="450" Width="800">
+        Title="出库单详情" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="orderHeaderTemplate">
             <TextBlock 
@@ -37,7 +37,7 @@
                 <ListView.View>
                     <GridView ColumnHeaderTemplate="{StaticResource orderHeaderTemplate}" >
 
-                        <GridViewColumn Header="编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
+                        <GridViewColumn Header="详情编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock
@@ -49,7 +49,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="物料编号" Width="{Binding ElementName=column2,Path=ActualWidth}">
+                        <GridViewColumn Header="刀具编号" Width="{Binding ElementName=column2,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Width="{Binding ElementName=column2,Path=ActualWidth}" FontSize="18" TextAlignment="Center" Text="{Binding mid}"/>
@@ -60,7 +60,7 @@
                         <GridViewColumn  Header="数量" Width="{Binding ElementName=column3,Path=ActualWidth}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="18" Text="{Binding num}"/>
+                                    <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="18" TextAlignment="Center" Text="{Binding num}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -17,7 +17,7 @@ namespace MaterialMS.output
         private int totalCount = 0;          //查询总数
         private int limit = 15;          //设置每页显示记录数
         private int totalPage;       //最大的页码数
-        private int search_type;     //全部查询为0，按用户名查询为1
+        private int search_type;     //全部查询为0，按日期查询为1
 
         public OutFormPage()
         {
@@ -32,11 +32,11 @@ namespace MaterialMS.output
                 tblSearchMsg.Text = "请输入订单编号或日期";
                 tbForSearch.Focus();
                 return;
-            }//按照零件名查询
+            }//按照日期查询
             else if (tbForSearch.Text.Trim() == "")
             {
                 tblSearchMsg.Text = "";
-                searchById(1);
+                searchByTime(1);
             }
             else {
                 tblSearchMsg.Text = "";
@@ -87,7 +87,7 @@ namespace MaterialMS.output
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;                
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit, tbForSearch.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
@@ -105,7 +105,8 @@ namespace MaterialMS.output
             }
         }
 
-        public void searchById(int page)
+
+        public void searchByTime(int page)
         {
             try
             {
@@ -153,7 +154,7 @@ namespace MaterialMS.output
             }
             else if (search_type == 1)
             {
-                searchById(currentpage - 1);
+                searchByTime(currentpage - 1);
             }
         }
 
@@ -168,7 +169,7 @@ namespace MaterialMS.output
             }
             else if (search_type == 1)
             {
-                searchById(currentpage + 1);
+                searchByTime(currentpage + 1);
             }
         }
 
@@ -188,7 +189,7 @@ namespace MaterialMS.output
             }
             else if (search_type == 1)
             {
-                searchById(gopage);
+                searchByTime(gopage);
             }
             go_num.Text = "";
         }

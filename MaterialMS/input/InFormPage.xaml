@@ -33,7 +33,7 @@
             <TextBlock
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
-                Text="编号" 
+                Text="入库单编号" 
                 FontSize="12"/>
 
             <TextBox 
@@ -119,7 +119,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
+                    <GridViewColumn  Header="入库员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding employee_id}"/>
@@ -127,11 +127,11 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="订单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
+                    <GridViewColumn  Header="入库单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
-                                    <Button  FontSize="12" Content="订单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
+                                    <Button  FontSize="12" Content="入库单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

@@ -105,7 +105,7 @@
                 
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
-                    <Button Content="注      册" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.181,0.309" Click="Regist_Click"/>
+                        <Button Content="添      加" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.181,0.309" Click="Regist_Click"/>
                 </StackPanel>
 
             </StackPanel>
