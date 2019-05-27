@@ -123,16 +123,19 @@ namespace MaterialMS.input
         public void searchByTime(int page)
         {
             try
-            {
-                string sql_count = string.Format("select count(*) from in_order where in_time='{0}'", dpYear.Text.Trim());
+            {             
+                string datetime = dpYear.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string sql_count = string.Format("select count(*) from in_order where in_time like '%{0}%'", datetime);
+                Console.WriteLine(sql_count);
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                 if (page == 1)
                 {
                     Sqlutils(sql_count);
-                }
+                }               
+                Console.WriteLine(totalCount);
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i where in_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i where in_time like '%{2}%') as new where k>'{0}' and k<='{1}'", begin, begin + limit, datetime);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);

@@ -117,13 +117,13 @@ namespace MaterialMS.knife_in
             MySqlTransaction transaction = conn.BeginTransaction();
             string in_id = System.Guid.NewGuid().ToString("N");
             string sql = string.Format("insert into in_order (in_id,in_time,employee_id) values('{0}','{1}','{2}')",
-                in_id, DateTime.Now.ToString("yyyy-MM-dd"), Account.Instance.GetUser().name);
+                in_id, DateTime.Now.ToLocalTime(), Account.Instance.GetUser().name);
 
             try
             {
                 MySqlCommand cmd = new MySqlCommand(sql, conn, transaction);
                 int result = cmd.ExecuteNonQuery();
-                if (result != 0)
+                if (result != 0 && materials.Count > 0)
                 {
                     int count = 0;
                     foreach (Material item in materials)
