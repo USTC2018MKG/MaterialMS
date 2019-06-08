@@ -108,7 +108,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <!--
                 <ColumnDefinition Width="*"/>
+                -->     
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" x:Name="column1"/>
             <Grid Grid.Column="1" x:Name="column2"/>
@@ -156,6 +158,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
+                    <!--
                     <GridViewColumn  Header="是否离职" Width="{Binding ElementName=column5,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -163,6 +166,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    -->
 
                     <GridViewColumn  Header="员工类型" Width="{Binding ElementName=column6,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>

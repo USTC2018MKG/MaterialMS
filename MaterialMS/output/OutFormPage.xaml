@@ -88,12 +88,14 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" x:Name="column1"/>
                 <Grid Grid.Column="1" x:Name="column2"/>
                 <Grid Grid.Column="2" x:Name="column3"/>
                 <Grid Grid.Column="3" x:Name="column4"/>
-            </Grid>
+                <Grid Grid.Column="4" x:Name="column5"/>
+        </Grid>
         <ListView
             Name="lvOrders" SelectionChanged="ordersItemClick">
             <ListView.View>
@@ -119,7 +121,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="出库员工编号" Width="{Binding ElementName=column3,Path=ActualWidth}">
+                    <GridViewColumn  Header="出库员工" Width="{Binding ElementName=column3,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Width="{Binding ElementName=column3,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding employee_id}"/>
@@ -127,10 +129,18 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Header="出库单详情" Width="{Binding ElementName=column4,Path=ActualWidth}">
+                    <GridViewColumn  Header="出库状态" Width="{Binding ElementName=column4,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid Width="{Binding ElementName=column4,Path=ActualWidth}">
+                                <TextBlock Width="{Binding ElementName=column4,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding state}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Header="出库单详情" Width="{Binding ElementName=column5,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding ElementName=column5,Path=ActualWidth}">
                                     <Button  FontSize="12" Content="出库单详情"  VerticalAlignment="Center" HorizontalAlignment="Center"   Command="{Binding Path=detail}" Foreground="White" Background="#FF6CABEE" Click="Detail_Click"/>
                                 </Grid>
                             </DataTemplate>

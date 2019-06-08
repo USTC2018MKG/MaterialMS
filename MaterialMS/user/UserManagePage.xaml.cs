@@ -305,7 +305,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i order by user_name) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i order by type) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);  

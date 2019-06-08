@@ -136,7 +136,7 @@ namespace MaterialMS.product
         //产品项添加
         private void SelectKnife_Click(object sender, RoutedEventArgs e)
         {
-            if (txtKnife.Text.Trim() != "" && txtNum.Text.Trim() != "")
+            if (txtKnife.Text.Trim() != "" && txtNum.Text.Trim() != ""  && txtPred.Text.Trim() != "")
             {
                 MySqlConnection connection = new MySqlConnection(Constant.myConnectionString);
                 connection.Open();

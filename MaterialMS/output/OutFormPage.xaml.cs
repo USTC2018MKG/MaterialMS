@@ -87,7 +87,7 @@ namespace MaterialMS.output
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;                
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,state from out_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
@@ -118,7 +118,7 @@ namespace MaterialMS.output
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id from out_order,(SELECT @i:=0) as i where out_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,state from out_order,(SELECT @i:=0) as i where out_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
