@@ -41,7 +41,7 @@
                 MaxLines="1"
                 Name="txtMname"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="150"/>
+                Margin="20,0,20,0" Height="35" Width="120"/>
             
             <TextBlock               
                 VerticalAlignment="Center"
@@ -53,7 +53,7 @@
                 MaxLines="1"
                 Name="txtMid"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="150"/>
+                Margin="20,0,20,0" Height="35" Width="120"/>
 
             <Button 
                 Style="{StaticResource commonButton}"

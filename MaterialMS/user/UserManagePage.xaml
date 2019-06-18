@@ -41,7 +41,7 @@
                 FontSize="12"
                 MaxLines="1"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="150"
+                Margin="20,0,20,0" Height="35" Width="120"
                 Name="txtName"/>
 
             <TextBlock               
@@ -53,7 +53,7 @@
                 FontSize="12"
                 MaxLines="1"
                 VerticalContentAlignment="Center"
-                Margin="20,0,20,0" Height="35" Width="150"
+                Margin="20,0,20,0" Height="35" Width="120"
                 Name="txtId"/>
 
             <Button 

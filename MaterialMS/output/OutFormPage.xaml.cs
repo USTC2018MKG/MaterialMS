@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,8 +40,7 @@ namespace MaterialMS.output
                 searchByTime(1);
             }
             else {
-                tblSearchMsg.Text = "";
-                //string date = Convert.ToDateTime(dpYear.Text).ToString("yyyyMMdd")
+                tblSearchMsg.Text = ""; 
                 string sql = string.Format("select * from out_order where out_id = '{0}'", tbForSearch.Text.Trim());
                 try
                 {
@@ -91,6 +91,9 @@ namespace MaterialMS.output
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
+                /*
+                List<Out> outs = new List<Out>();
+                */
                 lvOrders.ItemsSource = ds.Tables[0].AsDataView();
                 current_num.Content = page;
                 search_type = 0;
