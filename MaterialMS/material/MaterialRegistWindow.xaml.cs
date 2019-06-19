@@ -31,7 +31,7 @@ namespace MaterialMS
         {
             if (txtId.Text.Trim() == "")
             {
-                labIdMsg.Content = "请输入刀具编号!";
+                labMnameMsg.Content = "请输入刀具编号!";
                 txtId.Focus();
                 return;
             } else if (txtMname.Text.Trim() == "")
@@ -41,7 +41,7 @@ namespace MaterialMS
                 return;
             } else if (txtCycle.Text.Trim() == "")
             {
-                labCycleMsg.Content = "请输入交货周期!";
+                labBuytypeMsg.Content = "请输入交货周期!";
                 txtCycle.Focus();
                 return;
             } else if (txtBuytype.Text.Trim() == "")
@@ -51,7 +51,7 @@ namespace MaterialMS
                 return;
             } else if (txtBuybus.Text.Trim() == "")
             {
-                labBuybusMsg.Content = "请输入购物车代码!";
+                labFirstrepoMsg.Content = "请输入购物车代码!";
                 txtBuybus.Focus();
                 return;
             } else if (txtFirstrepo.Text.Trim() == "")
@@ -61,7 +61,7 @@ namespace MaterialMS
                 return;
             } else if (txtRepository.Text.Trim() == "")
             {
-                labRepositoryMsg.Content = "请输入刀具库位!";
+                labNtaxMsg.Content = "请输入刀具库位!";
                 txtRepository.Focus();
                 return;
             } else if (txtNtax.Text.Trim() == "")
@@ -71,7 +71,7 @@ namespace MaterialMS
                 return;
             } else if (txtKnife.Text.Trim() == "")
             {
-                labKnifeMsg.Content = "请输入刀片数量!";
+                labRotateMsg.Content = "请输入刀片数量!";
                 txtKnife.Focus();
                 return;
             } else if (txtRotate.Text.Trim() == "")
@@ -81,7 +81,7 @@ namespace MaterialMS
                 return;
             } else if (txtAge.Text.Trim() == "")
             {
-                labAgeMsg.Content = "请输入预计寿命!";
+                labExchangeMsg.Content = "请输入预计寿命!";
                 txtAge.Focus();
                 return;
             } else if (txtExchange.Text.Trim() == "")
@@ -91,7 +91,7 @@ namespace MaterialMS
                 return;
             } else if (txtGetmax.Text.Trim() == "")
             {
-                labGetmaxMsg.Content = "请输入领用上限!";
+                labCostMsg.Content = "请输入领用上限!";
                 txtGetmax.Focus();
                 return;
             } else if (txtCost.Text.Trim() == "")

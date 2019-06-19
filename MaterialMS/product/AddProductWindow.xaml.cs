@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,8 @@ namespace MaterialMS.product
                     {
                         MessageBox.Show("插入成功!");
                         transaction.Commit();
+                        productItems.Clear();
+                        this.Close();
                     }
                     else {
                         MessageBox.Show("插入失败!");
@@ -179,6 +182,7 @@ namespace MaterialMS.product
                             ProductItem prols = new ProductItem();
                             prols.mid = txtKnife.Text.Trim();
                             prols.num = int.Parse(txtNum.Text.Trim());
+                            prols.rest = int.Parse(sdr["rest"].ToString().Trim());
                             prols.pred_knife_num = int.Parse(txtPred.Text.Trim())/int.Parse(sdr["pred_age"].ToString().Trim())
                                 *int.Parse(sdr["knife_num"].ToString().Trim());
                             prols.maxsafe_repo = (int)(prols.pred_knife_num * 1.1);
@@ -225,6 +229,74 @@ namespace MaterialMS.product
 
             }
             return null;
+        }
+
+        // 刀具数量减一
+        private void BtnMinus_Click(object sender, RoutedEventArgs e)
+        {
+            lv.SelectedItem = ((Button)sender).DataContext;
+            ProductItem item = lv.SelectedItem as ProductItem;
+            if (item.num > 0)
+            {
+                item.num--;
+            }
+            else
+            {
+                MessageBox.Show("刀具数量不能为负");
+            }
+        }
+
+        // 刀具数量+1
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            lv.SelectedItem = ((Button)sender).DataContext;
+            ProductItem item = lv.SelectedItem as ProductItem;
+            if (item.num < item.rest)
+            {
+                item.num++;
+            }
+            else
+            {
+                MessageBox.Show("数量不可超过库存！");
+            }
+        }
+
+        // 不需要某种刀具，直接删除条目
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("确定不需要此种刀具吗？", "提示", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+            if (result == MessageBoxResult.OK)
+            {
+                lv.SelectedItem = ((Button)sender).DataContext;
+                ProductItem item = lv.SelectedItem as ProductItem;
+                productItems.Remove(item);
+            }
+        }
+
+        //生成二维码
+        private void CreateQR_Click(object sender, RoutedEventArgs e) {
+            if (txtId.Text != "")
+            {
+                Bitmap bitmap = BarcodeHelper.CreatQR(txtId.Text.ToString(), 70, 70);
+                ImageSource imageSource = BarcodeHelper.loadBitmap(bitmap);
+                img_br.Source = imageSource;
+            }
+            else {
+                labIdMsg.Content = "请输入产品编号!";
+                txtId.Focus();
+                return;
+            }    
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("确定不需要此种刀具吗？", "提示", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+            if (result == MessageBoxResult.OK)
+            {
+                lv.SelectedItem = ((Button)sender).DataContext;
+                ProductItem item = lv.SelectedItem as ProductItem;
+                productItems.Remove(item);
+            }
         }
     }
 }

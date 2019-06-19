@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MaterialMS
 {
-    public class Material
+    public class Material: INotifyPropertyChanged
     {
         public String mid{ get; set; }
         public String mname { get; set; }
@@ -22,7 +23,33 @@ namespace MaterialMS
         public String exchange { get; set; }
         public String get_max { get; set; }
         public String each_price { get; set; }
-        public String rest { get; set; } 
-        public String add_num { get; set; }
+        public String rest { get; set; }
+        private String num;
+
+
+        public String add_num
+        {
+            get
+            {
+                return this.num;
+            }
+
+            set
+            {
+                if (this.num != value)
+                {
+                    this.num = value;
+                    this.NotifyPropertyChanged("add_num");
+                }
+            }
+        }
+        //组件属性变更
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
     }
 }

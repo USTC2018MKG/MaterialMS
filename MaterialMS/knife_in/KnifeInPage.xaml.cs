@@ -26,11 +26,12 @@ namespace MaterialMS.knife_in
         private MySqlConnection conn = new MySqlConnection(Constant.myConnectionString);
         private Material material;
         private ObservableCollection<Material> materials = new ObservableCollection<Material>();
-        private ObservableCollection<Material> os;
+        private ObservableCollection<Material> os;   
 
         public KnifeInPage()
         {
             InitializeComponent();
+            knifeAddInfo.ItemsSource = materials;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -96,16 +97,39 @@ namespace MaterialMS.knife_in
                 string msg = "确定要入库刀具" + os[0].mid + ":" + os[0].add_num + "只吗?";
                 MessageBoxResult dr = MessageBox.Show(msg, "刀具入库", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (dr == MessageBoxResult.OK)
-                {                    
-                    materials.Add(os[0]);
-                    MessageBox.Show("添加成功!");
-                    knifeAddInfo.ItemsSource = materials;
+                {
+                    Material materialOld = findItem(os[0].mid);
+                    if (null != materialOld)
+                    {
+                        materialOld.add_num = (int.Parse(os[0].add_num)+int.Parse(materialOld.add_num)).ToString();
+                    }
+                    else {
+                        materials.Add(os[0]);
+                    }
+                    
+                    MessageBox.Show("添加成功!");                  
+                    Console.WriteLine(materials[0].add_num);
+                    os.Clear();
                 }
             }
             else {
                 MessageBox.Show("入库数量有误");
             }
             
+        }
+
+        private Material findItem(String mid)
+        {
+            foreach (Material i in materials)
+            {
+                if (i.mid.Equals(mid))
+                {
+                    // item.num += int.Parse(txtNum.Text);
+                    return i;
+                }
+
+            }
+            return null;
         }
 
         private void InList_Click(object sender, RoutedEventArgs e)
@@ -142,6 +166,7 @@ namespace MaterialMS.knife_in
                     {
                         MessageBox.Show("入库成功");
                         transaction.Commit();
+                        
                     }
                 }
                 else
@@ -157,6 +182,7 @@ namespace MaterialMS.knife_in
             }
             finally {
                 conn.Close();
+                materials.Clear(); 
             }
             
         }
