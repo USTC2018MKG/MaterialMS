@@ -39,9 +39,9 @@ namespace MaterialMS.input
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if (tbForSearch.Text.Trim() == "" && dpYear.Text.Trim() == "")
+            if (tbForSearch.Text.Trim() == "" && dpYearStart.Text.Trim() == "" && dpYearEnd.Text.Trim() == "")
             {
-                tblSearchMsg.Text = "请输入订单编号或日期!";
+                tblSearchMsg.Text = "请输入订单编号或起止日期!";
                 tbForSearch.Focus();
                 return;
             }
@@ -102,7 +102,7 @@ namespace MaterialMS.input
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}' order by in_time desc", begin, begin + limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
@@ -124,8 +124,9 @@ namespace MaterialMS.input
         {
             try
             {             
-                string datetime = dpYear.SelectedDate.Value.ToString("yyyy-MM-dd");
-                string sql_count = string.Format("select count(*) from in_order where in_time like '%{0}%'", datetime);
+                string starttime = dpYearStart.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string endtime = dpYearEnd.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string sql_count = string.Format("select count(*) from in_order where in_time >= '{0}' and in_time <= '{1}'", starttime,endtime);
                 Console.WriteLine(sql_count);
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                 if (page == 1)
@@ -135,7 +136,7 @@ namespace MaterialMS.input
                 Console.WriteLine(totalCount);
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i where in_time like '%{2}%') as new where k>'{0}' and k<='{1}'", begin, begin + limit, datetime);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,in_id,in_time,employee_id from in_order,(SELECT @i:=0) as i where in_time >= '{2}' and in_time <= '{3}') as new where k>'{0}' and k<='{1}' order by in_time desc", begin, begin + limit, starttime, endtime);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);

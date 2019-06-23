@@ -139,7 +139,8 @@ namespace MaterialMS.knife_in
             conn.Open();
             //打开通道，建立连接，可能出现异常,使用try catch语句   
             MySqlTransaction transaction = conn.BeginTransaction();
-            string in_id = System.Guid.NewGuid().ToString("N");
+            //string in_id = System.Guid.NewGuid().ToString("N");
+            string in_id = DateTime.Now.ToString("yyyyMMddhhmmssfff");
             string sql = string.Format("insert into in_order (in_id,in_time,employee_id) values('{0}','{1}','{2}')",
                 in_id, DateTime.Now.ToLocalTime(), Account.Instance.GetUser().employee_id);
 

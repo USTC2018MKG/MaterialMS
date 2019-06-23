@@ -86,7 +86,7 @@ namespace MaterialMS
                         user.password = sdr["user_pwd"].ToString().Trim();
                         user.sex = sdr["sex"].ToString().Trim();
                         user.phone = sdr["phone"].ToString().Trim();
-                        user.state = sdr["state"].ToString().Trim();
+                        user.state = sdr["ustate"].ToString().Trim();
                         user.type = sdr["type"].ToString().Trim();
 
                         Account.Instance.Login(user);

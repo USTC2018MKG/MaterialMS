@@ -35,7 +35,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Name="btnUserPage" Grid.Row="0" Grid.Column="0" Foreground="White" Background="#FF6CABEE" BorderBrush="White" FontSize="16" Click="userPageClick">用户管理
+            <Button Name="btnUserPage" Grid.Row="0" Grid.Column="0" Foreground="White" Background="#FF6CABEE" BorderBrush="White" FontSize="16" Click="userPageClick">员工管理
             </Button>
             <Button Name="btnMatePage" Grid.Row="1" Grid.Column="0" Background="#FF6CABEE" BorderBrush="White" Foreground="White" FontSize="16" Click="materialClick">刀具管理
             </Button>

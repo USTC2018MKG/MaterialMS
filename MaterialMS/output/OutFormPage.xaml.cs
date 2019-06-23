@@ -28,9 +28,9 @@ namespace MaterialMS.output
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if (tbForSearch.Text.Trim() == "" && dpYear.Text.Trim() == "")
+            if (tbForSearch.Text.Trim() == "" && dpYearStart.Text.Trim() == "" && dpYearEnd.Text.Trim() == "")
             {
-                tblSearchMsg.Text = "请输入订单编号或日期";
+                tblSearchMsg.Text = "请输入订单编号或起止日期";
                 tbForSearch.Focus();
                 return;
             }//按照日期查询
@@ -41,7 +41,7 @@ namespace MaterialMS.output
             }
             else {
                 tblSearchMsg.Text = ""; 
-                string sql = string.Format("select * from out_order where out_id = '{0}'", tbForSearch.Text.Trim());
+                string sql = string.Format("select * from out_order,user where out_order.employee_id = user.employee_id and out_order.out_id = '{0}' order by out_time desc", tbForSearch.Text.Trim());
                 try
                 {
                     conn.Open();//打开通道，建立连接
@@ -49,7 +49,80 @@ namespace MaterialMS.output
                     MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                     DataSet ds = new DataSet();
                     md.Fill(ds);
-                    lvOrders.ItemsSource = ds.Tables[0].AsDataView();
+                    List<Out> outs = new List<Out>();
+                    foreach (DataRow mDr in ds.Tables[0].Rows)
+                    {
+                        Out o = new Out();
+                        foreach (DataColumn mDc in ds.Tables[0].Columns)
+                        {
+                            if (mDc.ColumnName.Equals("out_id"))
+                            {
+                                o.out_id = mDr[mDc].ToString();
+                            }
+                            else if (mDc.ColumnName.Equals("out_time"))
+                            {
+                                o.out_time = mDr[mDc].ToString();
+                            }
+                            else if (mDc.ColumnName.Equals("employee_id"))
+                            {
+                                o.employee_id = mDr[mDc].ToString();
+                            }
+                            else if (mDc.ColumnName.Equals("user_name"))
+                            {
+                                o.user_name = mDr[mDc].ToString();
+                            }                           
+                            else if (mDc.ColumnName.Equals("phone"))
+                            {
+                                o.phone = mDr[mDc].ToString();
+                            }
+                            
+                            else if (mDc.ColumnName.Equals("type"))
+                            {
+                                if (mDr[mDc].ToString().Equals("0"))
+                                {
+                                    o.type = "员工";                 
+                                }
+                                else if (mDr[mDc].ToString().Equals("1"))
+                                {
+                                    o.type = "工程师";
+                                }
+                                else if (mDr[mDc].ToString().Equals("2"))
+                                {
+                                    o.type = "现场主管";                                  
+                                }
+                                else if (mDr[mDc].ToString().Equals("3"))
+                                {
+                                    o.type = "现场经理";
+                                }
+                                else if (mDr[mDc].ToString().Equals("10"))
+                                {
+                                    o.type = "超级管理员";
+                                }
+                                else if (mDr[mDc].ToString().Equals("11"))
+                                {
+                                    o.type = "刀具添加员";
+                                }                                
+                            }
+                            else if (mDc.ColumnName.Equals("change_type"))
+                            {
+                                if (mDr[mDc].ToString().Equals("0"))
+                                {
+                                    o.change_type = "以旧换新";
+                                }
+                                else if (mDr[mDc].ToString().Equals("1"))
+                                {
+                                    o.change_type = "异常领取";
+                                }
+                                else if (mDr[mDc].ToString().Equals("2"))
+                                {
+                                    o.change_type = "工艺新增";
+                                }
+                                
+                            }
+                        }
+                        outs.Add(o);                    
+                    }
+                    lvOrders.ItemsSource = outs;
                 }
                 catch (MySqlException ex)
                 {
@@ -65,12 +138,10 @@ namespace MaterialMS.output
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
             lvOrders.SelectedItem = ((Button)sender).DataContext;
-            DataRowView rowSelected = lvOrders.SelectedItem as DataRowView;
+            Out rowSelected = lvOrders.SelectedItem as Out;
             if (rowSelected != null)
             {
-                output = new Out();
-                output.out_id = rowSelected["out_id"].ToString();
-                outDetailWindow = new OutDetailWindow(output);
+                outDetailWindow = new OutDetailWindow(rowSelected);
                 outDetailWindow.Show();
             }
         }
@@ -86,15 +157,109 @@ namespace MaterialMS.output
                     Sqlutils(sql_count);
                 }
                 int begin = (page - 1) * limit;
-                total_num.Content = totalPage;                
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,state from out_order,(SELECT @i:=0) as i) as new where k>'{0}' and k<='{1}'", begin, begin + limit);
+                total_num.Content = totalPage;
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,admin_id,state,mode,change_type from out_order,(SELECT @i:=0) as i) as new,user where user.employee_id=new.employee_id and k>'{0}' and k<='{1}' order by out_time desc", begin, begin + limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
-                /*
                 List<Out> outs = new List<Out>();
-                */
-                lvOrders.ItemsSource = ds.Tables[0].AsDataView();
+                foreach (DataRow mDr in ds.Tables[0].Rows)
+                {
+                    Out o = new Out();
+                    foreach (DataColumn mDc in ds.Tables[0].Columns)
+                    {
+                        if (mDc.ColumnName.Equals("out_id"))
+                        {
+                            o.out_id = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("out_time"))
+                        {
+                            o.out_time = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("employee_id"))
+                        {
+                            o.employee_id = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("user_name"))
+                        {
+                            o.user_name = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("phone"))
+                        {
+                            o.phone = mDr[mDc].ToString();
+                        }
+
+                        else if (mDc.ColumnName.Equals("type"))
+                        {
+                            if (mDr[mDc].ToString().Equals("0"))
+                            {
+                                o.type = "员工";
+                            }
+                            else if (mDr[mDc].ToString().Equals("1"))
+                            {
+                                o.type = "工程师";
+                            }
+                            else if (mDr[mDc].ToString().Equals("2"))
+                            {
+                                o.type = "现场主管";
+                            }
+                            else if (mDr[mDc].ToString().Equals("3"))
+                            {
+                                o.type = "现场经理";
+                            }
+                            else if (mDr[mDc].ToString().Equals("10"))
+                            {
+                                o.type = "超级管理员";
+                            }
+                            else if (mDr[mDc].ToString().Equals("11"))
+                            {
+                                o.type = "刀具添加员";
+                            }
+                        }
+                        else if (mDc.ColumnName.Equals("change_type"))
+                        {
+                            if (mDr[mDc].ToString().Equals("0"))
+                            {
+                                o.change_type = "以旧换新";
+                            }
+                            else if (mDr[mDc].ToString().Equals("1"))
+                            {
+                                o.change_type = "异常领取";
+                            }
+                            else if (mDr[mDc].ToString().Equals("2"))
+                            {
+                                o.change_type = "工艺新增";
+                            }
+
+                        }
+                        else if (mDc.ColumnName.Equals("state"))
+                        {
+                            if (mDr[mDc].ToString().Equals("0"))
+                            {
+                                o.state = "下单成功";
+                            }
+                            else if (mDr[mDc].ToString().Equals("1"))
+                            {
+                                o.state = "PLC出柜成功";
+                            }
+                            else if (mDr[mDc].ToString().Equals("2"))
+                            {
+                                o.state = "PLC出柜失败";
+                            }
+                            else if (mDr[mDc].ToString().Equals("3"))
+                            {
+                                o.state = "领取成功";
+                            }
+                            else if (mDr[mDc].ToString().Equals("4"))
+                            {
+                                o.state = "超时";
+                            }
+
+                        }
+                    }
+                    outs.Add(o);
+                }
+                lvOrders.ItemsSource = outs;
                 current_num.Content = page;
                 search_type = 0;
             }
@@ -113,7 +278,9 @@ namespace MaterialMS.output
         {
             try
             {
-                string sql_count = string.Format("select count(*) from out_order where out_time='{0}'", dpYear.Text.Trim());
+                string starttime = dpYearStart.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string endtime = dpYearEnd.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string sql_count = string.Format("select count(*) from out_order where out_time >= '{0}' and out_time <= '{1}'", starttime, endtime);
                 conn.Open();//打开通道，建立连接，可能出现异常,使用try catch语句
                 if (page == 1)
                 {
@@ -121,12 +288,88 @@ namespace MaterialMS.output
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,state from out_order,(SELECT @i:=0) as i where out_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
+                //string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,state from out_order,(SELECT @i:=0) as new,user where new.employee_id = user.employee_id and out_time='{2}') as new where k>'{0}' and k<='{1}'", begin, begin + limit, dpYear.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,out_id,out_time,employee_id,admin_id,state,mode,change_type from out_order," +
+                    "(SELECT @i:=0) as i where out_time >= '{2}' and out_time <= '{3}') as new,user " +
+                    "where user.employee_id=new.employee_id and k>'{0}' and k<='{1}' order by out_time desc", begin, begin + limit, starttime, endtime);
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);
-                lvOrders.ItemsSource = ds.Tables[0].AsDataView();
+                List<Out> outs = new List<Out>();
+                foreach (DataRow mDr in ds.Tables[0].Rows)
+                {
+                    Out o = new Out();
+                    foreach (DataColumn mDc in ds.Tables[0].Columns)
+                    {
+                        if (mDc.ColumnName.Equals("out_id"))
+                        {
+                            o.out_id = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("out_time"))
+                        {
+                            o.out_time = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("employee_id"))
+                        {
+                            o.employee_id = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("user_name"))
+                        {
+                            o.user_name = mDr[mDc].ToString();
+                        }
+                        else if (mDc.ColumnName.Equals("phone"))
+                        {
+                            o.phone = mDr[mDc].ToString();
+                        }
+
+                        else if (mDc.ColumnName.Equals("type"))
+                        {
+                            if (mDr[mDc].ToString().Equals("0"))
+                            {
+                                o.type = "员工";
+                            }
+                            else if (mDr[mDc].ToString().Equals("1"))
+                            {
+                                o.type = "工程师";
+                            }
+                            else if (mDr[mDc].ToString().Equals("2"))
+                            {
+                                o.type = "现场主管";
+                            }
+                            else if (mDr[mDc].ToString().Equals("3"))
+                            {
+                                o.type = "现场经理";
+                            }
+                            else if (mDr[mDc].ToString().Equals("10"))
+                            {
+                                o.type = "超级管理员";
+                            }
+                            else if (mDr[mDc].ToString().Equals("11"))
+                            {
+                                o.type = "刀具添加员";
+                            }
+                        }
+                        else if (mDc.ColumnName.Equals("change_type"))
+                        {
+                            if (mDr[mDc].ToString().Equals("0"))
+                            {
+                                o.change_type = "以旧换新";
+                            }
+                            else if (mDr[mDc].ToString().Equals("1"))
+                            {
+                                o.change_type = "异常领取";
+                            }
+                            else if (mDr[mDc].ToString().Equals("2"))
+                            {
+                                o.change_type = "工艺新增";
+                            }
+
+                        }
+                    }
+                    outs.Add(o);
+                }
+                lvOrders.ItemsSource = outs;
                 current_num.Content = page;
                 search_type = 1;
             }

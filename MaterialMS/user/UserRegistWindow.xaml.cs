@@ -31,7 +31,7 @@ namespace MaterialMS
         {
             if (txtId.Text.Trim() == "")
             {
-                labIdMsg.Content = "请输入员工编号!";
+                labIdMsg.Content = "请输入ID卡号!";
                 txtId.Focus();
                 return;
             }else if (txtName.Text.Trim() == "")

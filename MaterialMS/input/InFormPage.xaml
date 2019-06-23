@@ -41,19 +41,31 @@
                 MaxLines="1"
                 Name="tbForSearch"
                 VerticalContentAlignment="Center"
-                Margin="30,0,30,0" Height="35" Width="200"/>
+                Margin="10,0,10,0" Height="35" Width="150"/>
 
             <TextBlock 
-                Text="日期"
+                Text="开始日期"
                 VerticalAlignment="Center"
                 FontSize="12"
                 Margin="10,0,10,0"
                 />
             <DatePicker
                 FontSize="12"                
-                Name="dpYear"
+                Name="dpYearStart"
                 VerticalContentAlignment="Center"
-                Margin="30,0,30,0" Height="35" Width="100"/>
+                Margin="10,0,10,0" Height="35" Width="100"/>
+            <TextBlock 
+                Text="结束日期"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Margin="10,0,10,0"
+                />
+            <DatePicker
+                FontSize="12"                
+                Name="dpYearEnd"
+                VerticalContentAlignment="Center"
+                Margin="10,0,30,0" Height="35" Width="100"/>
+            
             <Button 
                 Style="{StaticResource commonButton}"
                 FontSize="12"

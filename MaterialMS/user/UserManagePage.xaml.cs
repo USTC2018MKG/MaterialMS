@@ -71,7 +71,7 @@ namespace MaterialMS
         {
             if (txtName.Text.Trim() == "" && txtId.Text.Trim() == "")
             {
-                labSearchMsg.Content = "请输入员工姓名或编号!";
+                labSearchMsg.Content = "请输入员工姓名或ID卡号!";
                 txtName.Focus();
                 return;
             }
@@ -123,7 +123,7 @@ namespace MaterialMS
                             {
                                 u.phone = mDr[mDc].ToString();
                             }
-                            else if (mDc.ColumnName.Equals("state"))
+                            else if (mDc.ColumnName.Equals("ustate"))
                             {
                                 if (mDr[mDc].ToString().Equals("1"))
                                 {
@@ -256,10 +256,10 @@ namespace MaterialMS
                     return;
                 }
                 string name = rowSelected.name;
-                string msg = "确定要删除用户" + name + "吗？";
-                string sql = string.Format("update user set state=1 where employee_id='{0}'", rowSelected.employee_id);
+                string msg = "确定要删除员工" + name + "吗？";
+                string sql = string.Format("update user set ustate=1 where employee_id='{0}'", rowSelected.employee_id);
                 
-                MessageBoxResult dr = MessageBox.Show(msg, "删除用户", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult dr = MessageBox.Show(msg, "删除员工", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (dr == MessageBoxResult.OK)
                 {
                     try
@@ -305,7 +305,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i order by type) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,ustate,type from user,(SELECT @i:=0) as i order by type) as new where k>'{0}' and k<='{1}'", begin,begin+limit);
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 md.Fill(ds);  
@@ -341,7 +341,7 @@ namespace MaterialMS
                         {
                             u.phone = mDr[mDc].ToString();
                         }
-                        else if (mDc.ColumnName.Equals("state"))
+                        else if (mDc.ColumnName.Equals("ustate"))
                         {
                             if (mDr[mDc].ToString().Equals("1"))
                             {
@@ -416,7 +416,7 @@ namespace MaterialMS
                 }
                 int begin = (page - 1) * limit;
                 total_num.Content = totalPage;               
-                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,state,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where k>'{0}' and k<='{1}'", begin, begin + limit, txtName.Text.Trim());
+                string sql = string.Format("select * from (select (@i:= @i+1) as k,employee_id,user_name,sex,phone,ustate,type from user,(SELECT @i:=0) as i where user_name='{2}' order by user_name) as new where k>'{0}' and k<='{1}'", begin, begin + limit, txtName.Text.Trim());
                 //对数据库进行查询
                 MySqlDataAdapter md = new MySqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -452,8 +452,8 @@ namespace MaterialMS
                         else if (mDc.ColumnName.Equals("phone"))
                         {
                             u.phone = mDr[mDc].ToString();
-                        }
-                        else if (mDc.ColumnName.Equals("state"))
+                        }                        
+                        else if (mDc.ColumnName.Equals("ustate"))
                         {
                             if (mDr[mDc].ToString().Equals("1"))
                             {
@@ -465,7 +465,7 @@ namespace MaterialMS
                                 u.stateString = "在职";
                                 u.state = "0";
                             }
-                        }
+                        }                 
                         else if (mDc.ColumnName.Equals("type"))
                         {
                             if (mDr[mDc].ToString().Equals("0"))

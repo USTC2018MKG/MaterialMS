@@ -23,7 +23,7 @@
         </DataTemplate>
     </Page.Resources>
     <DockPanel >
-        <Label DockPanel.Dock="Top" Content="用户管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
+        <Label DockPanel.Dock="Top" Content="员工管理" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
         
         <StackPanel 
             Height="100"
@@ -34,7 +34,7 @@
             <TextBlock
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
-                Text="员工名称" 
+                Text="员工姓名" 
                 FontSize="12"/>
 
             <TextBox 
@@ -46,7 +46,7 @@
 
             <TextBlock               
                 VerticalAlignment="Center"
-                Text="员工编号" 
+                Text="ID卡号" 
                 FontSize="12"/>
 
             <TextBox 
@@ -126,14 +126,6 @@
             <ListView.View>
                 <GridView ColumnHeaderTemplate="{StaticResource materialHeaderTemplate}" AllowsColumnReorder="True">
 
-                    <GridViewColumn Header="员工编号" Width="{Binding ElementName=column1,Path=ActualWidth}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Width="{Binding ElementName=column1,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding employee_id}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
                     <GridViewColumn Header="员工姓名"  Width="{Binding ElementName=column2,Path=ActualWidth}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -172,6 +164,14 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Width="{Binding ElementName=column6,Path=ActualWidth}" FontSize="12"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding typeString}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="ID卡号" Width="{Binding ElementName=column1,Path=ActualWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Width="{Binding ElementName=column1,Path=ActualWidth}" FontSize="12" TextAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding employee_id}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
